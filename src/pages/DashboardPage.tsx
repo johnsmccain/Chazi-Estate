@@ -121,7 +121,7 @@ export const DashboardPage: React.FC = () => {
                 className="text-gray-300 text-base lg:text-lg"
               >
                 Your AI-powered real estate empire is thriving. Let's make some magic happen today! ✨
-              </p>
+              </motion.p>
             </div>
             
             <motion.div
