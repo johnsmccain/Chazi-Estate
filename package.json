@@ -1,7 +1,7 @@
 {
   "name": "deedai-platform",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,10 +13,14 @@
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.20.1",
-    "framer-motion": "^10.16.16",
-    "react-hook-form": "^7.48.2",
-    "react-hot-toast": "^2.4.1"
+    "react-router-dom": "^6.26.0",
+    "axios": "^1.6.0",
+    "framer-motion": "^10.16.0",
+    "react-dropzone": "^14.2.3",
+    "react-hook-form": "^7.47.0",
+    "date-fns": "^2.30.0",
+    "algosdk": "^2.7.0",
+    "@supabase/supabase-js": "^2.39.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
