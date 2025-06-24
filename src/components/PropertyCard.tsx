@@ -2,26 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   MapPin, 
-  DollarSign, 
-  Home, 
   Calendar,
   Shield,
-  Eye,
-  ArrowRight,
-  CheckCircle,
-  Clock,
-  AlertTriangle,
-  Building,
-  Users,
-  Star,
-  PieChart,
-  Key,
-  CreditCard,
-  Percent,
   TrendingUp,
   Vote
 } from 'lucide-react';
 import { Property, formatCurrency } from '../lib/supabase';
+import { Card } from './ui/Card';
+import { PropertyImage } from './property/PropertyImage';
+import { PropertyBadges } from './property/PropertyBadges';
+import { PropertyStats } from './property/PropertyStats';
+import { PropertyActions } from './property/PropertyActions';
 
 interface PropertyCardProps {
   property: Property;
@@ -38,143 +29,32 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
   variant = 'default',
   userShares = 0
 }) => {
-  const getStatusConfig = (status: string) => {
-    switch (status) {
-      case 'verified':
-        return {
-          icon: CheckCircle,
-          color: 'text-emerald-400 bg-emerald-400/20 border-emerald-400/30',
-          label: 'Verified'
-        };
-      case 'pending':
-        return {
-          icon: Clock,
-          color: 'text-amber-400 bg-amber-400/20 border-amber-400/30',
-          label: 'Pending'
-        };
-      case 'unverified':
-        return {
-          icon: AlertTriangle,
-          color: 'text-red-400 bg-red-400/20 border-red-400/30',
-          label: 'Unverified'
-        };
-      default:
-        return {
-          icon: AlertTriangle,
-          color: 'text-gray-400 bg-gray-400/20 border-gray-400/30',
-          label: 'Unknown'
-        };
-    }
-  };
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'Residential': return Home;
-      case 'Commercial': return Building;
-      case 'Industrial': return Building;
-      case 'Land': return Building;
-      default: return Home;
-    }
-  };
-
-  const statusConfig = getStatusConfig(property.status);
-  const StatusIcon = statusConfig.icon;
-  const TypeIcon = getTypeIcon(property.type);
-
   const ownershipPercentage = property.total_shares ? (userShares / property.total_shares) * 100 : 0;
-  const availablePercentage = property.total_shares && property.available_shares 
-    ? (property.available_shares / property.total_shares) * 100 
-    : 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5, scale: 1.02 }}
-      transition={{ duration: 0.3 }}
+    <Card
+      hover={true}
       onClick={onClick}
       className={`
-        bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg 
-        border border-white/20 rounded-2xl overflow-hidden shadow-xl
-        hover:shadow-2xl hover:border-emerald-400/30 transition-all duration-300
-        cursor-pointer group
+        overflow-hidden group
         ${variant === 'compact' ? 'max-w-sm' : ''}
       `}
     >
       {/* Property Image */}
-      <div className="relative overflow-hidden">
-        <motion.img
-          src={property.image_url}
-          alt={property.title}
-          className="w-full h-40 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-          whileHover={{ scale: 1.1 }}
+      <PropertyImage
+        src={property.image_url}
+        alt={property.title}
+      >
+        <PropertyBadges
+          status={property.status}
+          type={property.type}
+          rating={property.rating}
+          views={property.views}
+          userShares={userShares}
+          totalShares={property.total_shares}
+          availableShares={property.available_shares}
         />
-        
-        {/* Status Badge */}
-        <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
-          <div className={`
-            inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium
-            border backdrop-blur-sm ${statusConfig.color}
-          `}>
-            <StatusIcon className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
-            {statusConfig.label}
-          </div>
-        </div>
-
-        {/* Property Type Badge */}
-        <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
-          <div className="bg-blue-500/80 backdrop-blur-sm text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium flex items-center space-x-1">
-            <TypeIcon className="h-2 w-2 sm:h-3 sm:w-3" />
-            <span className="hidden sm:inline">{property.type}</span>
-          </div>
-        </div>
-
-        {/* User Ownership Badge */}
-        {userShares > 0 && (
-          <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
-            <div className="bg-gradient-to-r from-purple-500/80 to-pink-500/80 backdrop-blur-sm text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-bold">
-              <span>You own {ownershipPercentage.toFixed(1)}%</span>
-            </div>
-          </div>
-        )}
-
-        {/* Availability Badge */}
-        {property.available_shares && property.available_shares > 0 && (
-          <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4">
-            <div className="bg-emerald-500/80 backdrop-blur-sm text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium">
-              {availablePercentage.toFixed(0)}% Available
-            </div>
-          </div>
-        )}
-
-        {/* Rating and Views */}
-        <div className="absolute top-12 right-3 sm:top-16 sm:right-4 flex flex-col space-y-1 sm:space-y-2">
-          {property.rating && (
-            <div className="bg-amber-500/80 backdrop-blur-sm text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs font-medium flex items-center space-x-1">
-              <Star className="h-2 w-2 sm:h-3 sm:w-3 fill-current" />
-              <span>{property.rating}</span>
-            </div>
-          )}
-          <div className="bg-gray-500/80 backdrop-blur-sm text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs font-medium flex items-center space-x-1">
-            <Eye className="h-2 w-2 sm:h-3 sm:w-3" />
-            <span className="hidden sm:inline">{property.views}</span>
-            <span className="sm:hidden">{property.views > 999 ? '1k+' : property.views}</span>
-          </div>
-        </div>
-
-        {/* Hover Overlay */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end justify-center pb-4"
-        >
-          <div className="flex items-center space-x-2 text-white">
-            <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
-            <span className="text-xs sm:text-sm font-medium">View Details</span>
-            <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
-          </div>
-        </motion.div>
-      </div>
+      </PropertyImage>
 
       {/* Property Details */}
       <div className="p-4 sm:p-6">
@@ -190,29 +70,13 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         </div>
 
         {/* Property Stats */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
-          <div className="bg-white/5 rounded-lg p-2 sm:p-3">
-            <div className="flex items-center space-x-1 sm:space-x-2 mb-1">
-              <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-400" />
-              <span className="text-gray-300 text-xs">Total Value</span>
-            </div>
-            <p className="text-white font-semibold text-sm sm:text-base">{formatCurrency(property.price)}</p>
-            {property.price_per_sqft && (
-              <p className="text-gray-400 text-xs">{formatCurrency(property.price_per_sqft)}/sq ft</p>
-            )}
-          </div>
-          
-          <div className="bg-white/5 rounded-lg p-2 sm:p-3">
-            <div className="flex items-center space-x-1 sm:space-x-2 mb-1">
-              <Home className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
-              <span className="text-gray-300 text-xs">Size</span>
-            </div>
-            <p className="text-white font-semibold text-sm sm:text-base">{property.sqft.toLocaleString()} sq ft</p>
-            {property.bedrooms && property.bathrooms && (
-              <p className="text-gray-400 text-xs">{property.bedrooms}bd/{property.bathrooms}ba</p>
-            )}
-          </div>
-        </div>
+        <PropertyStats
+          price={property.price}
+          pricePerSqft={property.price_per_sqft}
+          sqft={property.sqft}
+          bedrooms={property.bedrooms}
+          bathrooms={property.bathrooms}
+        />
 
         {/* Fractional Ownership Details */}
         {property.ownership_type === 'Fractional' && property.total_shares && (
@@ -255,33 +119,6 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             )}
           </div>
         )}
-
-        {/* Investment Options */}
-        <div className="space-y-2 mb-3 sm:mb-4">
-          {property.rent_available && property.rent_price && (
-            <div className="flex items-center justify-between bg-green-500/10 rounded-lg p-2 sm:p-3 border border-green-400/20">
-              <div className="flex items-center space-x-1 sm:space-x-2">
-                <Key className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
-                <span className="text-green-300 text-xs sm:text-sm font-medium">Rent Available</span>
-              </div>
-              <span className="text-green-400 font-semibold text-xs sm:text-sm">{formatCurrency(property.rent_price)}/mo</span>
-            </div>
-          )}
-          {property.loan_available && property.interest_rate && (
-            <div className="flex items-center justify-between bg-blue-500/10 rounded-lg p-2 sm:p-3 border border-blue-400/20">
-              <div className="flex items-center space-x-1 sm:space-x-2">
-                <CreditCard className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
-                <span className="text-blue-300 text-xs sm:text-sm font-medium">Financing Available</span>
-              </div>
-              <div className="text-right">
-                <p className="text-blue-400 font-semibold text-xs sm:text-sm">{property.interest_rate}% APR</p>
-                {property.loan_to_value && (
-                  <p className="text-gray-400 text-xs">{property.loan_to_value}% LTV</p>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
 
         {/* DAO Governance */}
         {property.dao_enabled && userShares > 0 && (
@@ -334,50 +171,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
-          {property.fraction_available && property.available_shares && property.available_shares > 0 && (
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-gradient-to-r from-purple-500 to-pink-600 text-white py-2 px-2 sm:px-3 rounded-lg font-medium text-xs sm:text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
-            >
-              <PieChart className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-              <span>Buy</span>
-            </motion.button>
-          )}
-          {property.rent_available && (
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-gradient-to-r from-green-500 to-emerald-600 text-white py-2 px-2 sm:px-3 rounded-lg font-medium text-xs sm:text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
-            >
-              <Key className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-              <span>Rent</span>
-            </motion.button>
-          )}
-          {property.loan_available && (
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 px-2 sm:px-3 rounded-lg font-medium text-xs sm:text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
-            >
-              <CreditCard className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-              <span>Loan</span>
-            </motion.button>
-          )}
-          {(!property.fraction_available || !property.available_shares || property.available_shares === 0) && 
-           !property.rent_available && !property.loan_available && (
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="col-span-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white py-2 px-2 sm:px-3 rounded-lg font-medium text-xs sm:text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
-            >
-              <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span>View Details</span>
-            </motion.button>
-          )}
-        </div>
+        <PropertyActions property={property} />
       </div>
-    </motion.div>
+    </Card>
   );
 };
