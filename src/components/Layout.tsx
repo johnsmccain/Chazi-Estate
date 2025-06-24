@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -33,6 +33,23 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Close sidebar when route changes on mobile
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
+
+  // Close sidebar when clicking outside on mobile
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -111,15 +128,20 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex">
       {/* Sidebar */}
       <motion.div
-        initial={{ x: -300 }}
-        animate={{ x: 0 }}
-        className={`fixed inset-y-0 left-0 z-50 w-80 max-w-[85vw] bg-gradient-to-b from-slate-800/95 to-slate-900/95 backdrop-blur-xl border-r border-white/10 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        initial={false}
+        animate={{ 
+          x: sidebarOpen ? 0 : -320,
+          transition: { type: "spring", stiffness: 300, damping: 30 }
+        }}
+        className={`fixed inset-y-0 left-0 z-50 w-80 max-w-[90vw] bg-gradient-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
       >
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between p-4 lg:p-6 border-b border-white/10">
-          <Link to="/dashboard" className="flex items-center space-x-2 lg:space-x-3">
+        <div className="flex items-center justify-between p-4 lg:p-6 border-b border-white/10 min-h-[64px]">
+          <Link 
+            to="/dashboard" 
+            className="flex items-center space-x-2 lg:space-x-3"
+            onClick={() => setSidebarOpen(false)}
+          >
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
@@ -135,12 +157,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               </div>
             </div>
           </Link>
-          <button
+          <motion.button
             onClick={() => setSidebarOpen(false)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             className="lg:hidden p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
           >
             <X className="h-5 w-5" />
-          </button>
+          </motion.button>
         </div>
 
         {/* User Profile */}
@@ -150,7 +174,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               whileHover={{ scale: 1.1 }}
               src={user?.picture || '/api/placeholder/48/48'}
               alt={user?.name}
-              className="h-10 w-10 lg:h-12 lg:w-12 rounded-xl object-cover shadow-lg"
+              className="h-10 w-10 lg:h-12 lg:w-12 rounded-xl object-cover shadow-lg flex-shrink-0"
             />
             <div className="flex-1 min-w-0">
               <p className="text-white font-semibold truncate text-sm lg:text-base">{user?.name}</p>
@@ -158,7 +182,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="w-2 h-2 lg:w-3 lg:h-3 bg-emerald-400 rounded-full shadow-lg"
+              className="w-2 h-2 lg:w-3 lg:h-3 bg-emerald-400 rounded-full shadow-lg flex-shrink-0"
             />
           </div>
         </div>
@@ -170,7 +194,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               key={item.path}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.05 }}
             >
               <Link
                 to={item.path}
@@ -183,7 +207,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`p-2 lg:p-3 rounded-lg lg:rounded-xl bg-gradient-to-br ${item.color} shadow-lg ${
+                  className={`p-2 lg:p-3 rounded-lg lg:rounded-xl bg-gradient-to-br ${item.color} shadow-lg flex-shrink-0 ${
                     isActive(item.path) ? 'shadow-emerald-500/25' : ''
                   }`}
                 >
@@ -195,7 +219,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   }`}>
                     {item.label}
                   </p>
-                  <p className="text-gray-400 text-xs lg:text-sm truncate group-hover:text-gray-300 transition-colors hidden lg:block">
+                  <p className="text-gray-400 text-xs lg:text-sm truncate group-hover:text-gray-300 transition-colors">
                     {item.description}
                   </p>
                 </div>
@@ -205,7 +229,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     opacity: isActive(item.path) ? 1 : 0,
                     x: isActive(item.path) ? 0 : -10
                   }}
-                  className="text-emerald-400"
+                  className="text-emerald-400 flex-shrink-0"
                 >
                   <ChevronRight className="h-3 w-3 lg:h-4 lg:w-4" />
                 </motion.div>
@@ -218,16 +242,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="p-3 lg:p-4 border-t border-white/10 space-y-1 lg:space-y-2">
           <Link
             to="/settings"
+            onClick={() => setSidebarOpen(false)}
             className="flex items-center space-x-2 lg:space-x-3 p-2 lg:p-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg lg:rounded-xl transition-all duration-300 group"
           >
-            <Settings className="h-4 w-4 lg:h-5 lg:w-5 group-hover:rotate-90 transition-transform duration-300" />
+            <Settings className="h-4 w-4 lg:h-5 lg:w-5 group-hover:rotate-90 transition-transform duration-300 flex-shrink-0" />
             <span className="text-sm lg:text-base">Settings</span>
           </Link>
           <button
             onClick={handleLogout}
             className="w-full flex items-center space-x-2 lg:space-x-3 p-2 lg:p-3 text-gray-300 hover:text-red-300 hover:bg-red-500/10 rounded-lg lg:rounded-xl transition-all duration-300 group"
           >
-            <LogOut className="h-4 w-4 lg:h-5 lg:w-5 group-hover:translate-x-1 transition-transform duration-300" />
+            <LogOut className="h-4 w-4 lg:h-5 lg:w-5 group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0" />
             <span className="text-sm lg:text-base">Sign Out</span>
           </button>
         </div>
@@ -239,24 +264,26 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <header className="bg-white/5 backdrop-blur-lg border-b border-white/10 sticky top-0 z-40">
           <div className="px-4 lg:px-6 py-3 lg:py-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3 lg:space-x-4">
-                <button
-                  onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="lg:hidden p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+              <div className="flex items-center space-x-3 lg:space-x-4 min-w-0 flex-1">
+                <motion.button
+                  onClick={() => setSidebarOpen(true)}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="lg:hidden p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex-shrink-0"
                 >
                   <Menu className="h-5 w-5" />
-                </button>
-                <div>
-                  <h1 className="text-xl lg:text-2xl font-bold text-white">
+                </motion.button>
+                <div className="min-w-0 flex-1">
+                  <h1 className="text-xl lg:text-2xl font-bold text-white truncate">
                     {navItems.find(item => item.path === location.pathname)?.label || 'Dashboard'}
                   </h1>
-                  <p className="text-gray-300 text-xs lg:text-sm hidden sm:block">
+                  <p className="text-gray-300 text-xs lg:text-sm truncate hidden sm:block">
                     {navItems.find(item => item.path === location.pathname)?.description || 'Welcome back!'}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-2 lg:space-x-4">
+              <div className="flex items-center space-x-2 lg:space-x-4 flex-shrink-0">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -277,12 +304,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <img
                     src={user?.picture || '/api/placeholder/32/32'}
                     alt={user?.name}
-                    className="h-6 w-6 lg:h-8 lg:w-8 rounded-md lg:rounded-lg object-cover"
+                    className="h-6 w-6 lg:h-8 lg:w-8 rounded-md lg:rounded-lg object-cover flex-shrink-0"
                   />
-                  <div className="hidden sm:block">
-                    <p className="text-white text-xs lg:text-sm font-medium">{user?.name?.split(' ')[0]}</p>
+                  <div className="hidden sm:block min-w-0">
+                    <p className="text-white text-xs lg:text-sm font-medium truncate">{user?.name?.split(' ')[0]}</p>
                     <div className="flex items-center space-x-1">
-                      <Heart className="h-2 w-2 lg:h-3 lg:w-3 text-pink-400" />
+                      <Heart className="h-2 w-2 lg:h-3 lg:w-3 text-pink-400 flex-shrink-0" />
                       <span className="text-emerald-300 text-xs">Online</span>
                     </div>
                   </div>
@@ -311,14 +338,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
           />
         )}
       </AnimatePresence>
 
       {/* Built with Bolt.new Badge */}
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-4 right-4 z-30">
         <motion.a
           href="https://bolt.new"
           target="_blank"
@@ -327,10 +354,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           whileTap={{ scale: 0.95 }}
           className="flex items-center space-x-1 lg:space-x-2 bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-2 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-medium shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300"
         >
-          <Zap className="h-3 w-3 lg:h-4 lg:w-4" />
+          <Zap className="h-3 w-3 lg:h-4 lg:w-4 flex-shrink-0" />
           <span className="hidden sm:inline">Built with Bolt.new</span>
           <span className="sm:hidden">Bolt.new</span>
-          <Heart className="h-2 w-2 lg:h-3 lg:w-3" />
+          <Heart className="h-2 w-2 lg:h-3 lg:w-3 flex-shrink-0" />
         </motion.a>
       </div>
     </div>
