@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
-import { AIVoiceAgent } from '../components/AIVoiceAgent';
-import { 
-  Building2, 
-  ArrowRight,
-  CheckCircle,
-  User,
-  Shield,
-  Zap,
-  Heart,
-  Sparkles
-} from 'lucide-react';
+import { Building2, User, Shield, Zap, CheckCircle, Sparkles } from 'lucide-react';
+
+// Import new components
+import { ProgressBar } from '../components/onboarding/ProgressBar';
+import { StepContent } from '../components/onboarding/StepContent';
+import { NavigationButtons } from '../components/onboarding/NavigationButtons';
 
 export const OnboardingPage: React.FC = () => {
   const { user } = useAuth();
@@ -94,21 +89,7 @@ export const OnboardingPage: React.FC = () => {
             <Sparkles className="h-5 w-5 lg:h-6 lg:w-6 text-amber-400" />
           </motion.div>
           
-          {/* Progress Bar */}
-          <div className="max-w-md mx-auto mb-4 lg:mb-6">
-            <div className="flex justify-between text-xs lg:text-sm text-gray-300 mb-2">
-              <span>Step {currentStep + 1} of {steps.length}</span>
-              <span>{Math.round(((currentStep + 1) / steps.length) * 100)}% Complete</span>
-            </div>
-            <div className="w-full bg-white/10 rounded-full h-2 lg:h-3 overflow-hidden">
-              <motion.div
-                className="h-full bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full shadow-lg"
-                initial={{ width: 0 }}
-                animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              />
-            </div>
-          </div>
+          <ProgressBar currentStep={currentStep} totalSteps={steps.length} />
         </div>
 
         {/* Main Content */}
@@ -122,72 +103,15 @@ export const OnboardingPage: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="space-y-6 lg:space-y-8"
             >
-              {/* Step Icon and Title */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-center"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br ${currentStepData.color} shadow-2xl mb-4 lg:mb-6`}
-                >
-                  <currentStepData.icon className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
-                </motion.div>
-                <h2 className="text-2xl lg:text-3xl font-bold text-white mb-2 px-4">
-                  {currentStepData.title}
-                </h2>
-              </motion.div>
-
-              {/* AI Voice Agent */}
-              {showAgent && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="px-4"
-                >
-                  <AIVoiceAgent
-                    message={currentStepData.content}
-                    isActive={true}
-                    agentName="Your Personal DeedAI Assistant"
-                    showVisualizer={true}
-                  />
-                </motion.div>
-              )}
-
-              {/* Action Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4 px-4"
-              >
-                <button
-                  onClick={skipOnboarding}
-                  className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center space-x-2 group text-sm lg:text-base"
-                >
-                  <span>Skip onboarding</span>
-                  <motion.div
-                    whileHover={{ x: 5 }}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <ArrowRight className="h-4 w-4" />
-                  </motion.div>
-                </button>
-
-                <motion.button
-                  onClick={nextStep}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 lg:px-8 py-3 lg:py-4 rounded-xl font-semibold flex items-center space-x-2 lg:space-x-3 shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300 text-sm lg:text-base"
-                >
-                  <Heart className="h-4 w-4 lg:h-5 lg:w-5" />
-                  <span>{currentStepData.action}</span>
-                  <ArrowRight className="h-4 w-4 lg:h-5 lg:w-5" />
-                </motion.button>
-              </motion.div>
+              <StepContent step={currentStepData} showAgent={showAgent} />
+              
+              <NavigationButtons
+                currentStep={currentStep}
+                totalSteps={steps.length}
+                actionText={currentStepData.action}
+                onNext={nextStep}
+                onSkip={skipOnboarding}
+              />
             </motion.div>
           )}
         </AnimatePresence>
