@@ -30,7 +30,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 x: sidebarOpen ? 0 : 0,
                 transition: { type: "spring", stiffness: 300, damping: 30 }
               }}
-              className={`fixed max-lg:hidden top-0 inset-y-0 left-0 z-50 overflow-y-scroll h-screen bg-linear-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
+              className={`fixed max-lg:hidden top-0 inset-y-0 left-0 z-50 h-screen overflow-y-scroll bg-linear-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
             >
       <Sidebar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen}/>
       </motion.div>
