@@ -192,14 +192,14 @@ export const AIVoiceAgent: React.FC<AIVoiceAgentProps> = ({
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
-      className={`bg-gradient-to-br ${currentPersonality.colors}/20 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl relative overflow-hidden`}
+      className={`bg-linear-to-br ${currentPersonality.colors}/20 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl relative overflow-hidden`}
     >
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute w-2 h-2 bg-gradient-to-r ${currentPersonality.colors} rounded-full opacity-30`}
+            className={`absolute w-2 h-2 bg-linear-to-r ${currentPersonality.colors} rounded-full opacity-30`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -233,7 +233,7 @@ export const AIVoiceAgent: React.FC<AIVoiceAgentProps> = ({
               duration: isThinking ? 0.8 : 1, 
               repeat: (isThinking || isPlaying) ? Infinity : 0 
             }}
-            className={`w-20 h-20 bg-gradient-to-br ${currentPersonality.colors} rounded-2xl flex items-center justify-center shadow-2xl relative`}
+            className={`w-20 h-20 bg-linear-to-br ${currentPersonality.colors} rounded-2xl flex items-center justify-center shadow-2xl relative`}
           >
             {avatar ? (
               <img src={avatar} alt={agentName} className="w-16 h-16 rounded-xl object-cover" />
@@ -274,7 +274,7 @@ export const AIVoiceAgent: React.FC<AIVoiceAgentProps> = ({
                 {[...Array(4)].map((_, i) => (
                   <motion.div
                     key={i}
-                    className={`w-1 bg-gradient-to-t ${currentPersonality.colors} rounded-full`}
+                    className={`w-1 bg-linear-to-t ${currentPersonality.colors} rounded-full`}
                     animate={{ 
                       height: isThinking ? [4, 8, 4] : [4, 16, 4] 
                     }}
@@ -385,7 +385,7 @@ export const AIVoiceAgent: React.FC<AIVoiceAgentProps> = ({
               key={index}
               className={`${
                 isPlaying && index === currentWord
-                  ? `bg-gradient-to-r ${currentPersonality.colors}/30 text-white px-1 rounded`
+                  ? `bg-linear-to-r ${currentPersonality.colors}/30 text-white px-1 rounded-sm`
                   : 'text-gray-200'
               } transition-all duration-200`}
               animate={
@@ -414,7 +414,7 @@ export const AIVoiceAgent: React.FC<AIVoiceAgentProps> = ({
               {[...Array(4)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className={`w-2 h-2 bg-gradient-to-r ${currentPersonality.colors} rounded-full`}
+                  className={`w-2 h-2 bg-linear-to-r ${currentPersonality.colors} rounded-full`}
                   animate={{ 
                     opacity: [0.3, 1, 0.3],
                     scale: [1, 1.2, 1]

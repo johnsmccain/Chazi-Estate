@@ -177,7 +177,7 @@ export const DeedGeneratorPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
       >
         <div className="flex items-center justify-between mb-8">
           {steps.map((step, index) => (
@@ -186,7 +186,7 @@ export const DeedGeneratorPage: React.FC = () => {
                 whileHover={{ scale: 1.1 }}
                 className={`flex items-center justify-center w-16 h-16 rounded-2xl transition-all duration-300 ${
                   index <= currentStep 
-                    ? `bg-gradient-to-br ${step.color} shadow-lg` 
+                    ? `bg-linear-to-br ${step.color} shadow-lg` 
                     : 'bg-gray-600 text-gray-300'
                 }`}
               >
@@ -210,7 +210,7 @@ export const DeedGeneratorPage: React.FC = () => {
               </div>
               {index < steps.length - 1 && (
                 <div className={`w-20 h-1 mx-4 rounded-full transition-all duration-300 ${
-                  index < currentStep ? 'bg-gradient-to-r from-emerald-400 to-blue-500' : 'bg-gray-600'
+                  index < currentStep ? 'bg-linear-to-r from-emerald-400 to-blue-500' : 'bg-gray-600'
                 }`} />
               )}
             </div>
@@ -222,7 +222,7 @@ export const DeedGeneratorPage: React.FC = () => {
             key={currentStep}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className={`inline-flex items-center space-x-3 px-6 py-3 rounded-2xl bg-gradient-to-r ${currentStepData.color} shadow-lg`}
+            className={`inline-flex items-center space-x-3 px-6 py-3 rounded-2xl bg-linear-to-r ${currentStepData.color} shadow-lg`}
           >
             <currentStepData.icon className="h-6 w-6 text-white" />
             <span className="text-white font-semibold text-lg">{currentStepData.title}</span>
@@ -237,7 +237,7 @@ export const DeedGeneratorPage: React.FC = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+          className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
         >
           <AnimatePresence mode="wait">
             {/* Step 1: Property Information */}
@@ -263,7 +263,7 @@ export const DeedGeneratorPage: React.FC = () => {
                       type="text"
                       value={formData.propertyAddress}
                       onChange={(e) => handleInputChange('propertyAddress', e.target.value)}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
                       placeholder="123 Main Street"
                     />
                   </div>
@@ -277,7 +277,7 @@ export const DeedGeneratorPage: React.FC = () => {
                         type="text"
                         value={formData.city}
                         onChange={(e) => handleInputChange('city', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
+                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
                         placeholder="San Francisco"
                       />
                     </div>
@@ -289,7 +289,7 @@ export const DeedGeneratorPage: React.FC = () => {
                         type="text"
                         value={formData.state}
                         onChange={(e) => handleInputChange('state', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
+                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
                         placeholder="CA"
                       />
                     </div>
@@ -304,7 +304,7 @@ export const DeedGeneratorPage: React.FC = () => {
                         type="text"
                         value={formData.zipCode}
                         onChange={(e) => handleInputChange('zipCode', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
+                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
                         placeholder="94102"
                       />
                     </div>
@@ -315,7 +315,7 @@ export const DeedGeneratorPage: React.FC = () => {
                       <select
                         value={formData.propertyType}
                         onChange={(e) => handleInputChange('propertyType', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
+                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
                       >
                         <option value="Residential">Residential</option>
                         <option value="Commercial">Commercial</option>
@@ -351,7 +351,7 @@ export const DeedGeneratorPage: React.FC = () => {
                       type="text"
                       value={formData.ownerName}
                       onChange={(e) => handleInputChange('ownerName', e.target.value)}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
                       placeholder="John Doe"
                     />
                   </div>
@@ -367,7 +367,7 @@ export const DeedGeneratorPage: React.FC = () => {
                         max="100"
                         value={formData.ownershipPercentage}
                         onChange={(e) => handleInputChange('ownershipPercentage', parseFloat(e.target.value))}
-                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
+                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
                         placeholder="100"
                       />
                     </div>
@@ -379,7 +379,7 @@ export const DeedGeneratorPage: React.FC = () => {
                         type="number"
                         value={formData.purchasePrice}
                         onChange={(e) => handleInputChange('purchasePrice', parseFloat(e.target.value))}
-                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
+                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
                         placeholder="500000"
                       />
                     </div>
@@ -394,7 +394,7 @@ export const DeedGeneratorPage: React.FC = () => {
                         type="date"
                         value={formData.purchaseDate}
                         onChange={(e) => handleInputChange('purchaseDate', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
+                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
                       />
                     </div>
                     <div>
@@ -404,7 +404,7 @@ export const DeedGeneratorPage: React.FC = () => {
                       <select
                         value={formData.deedType}
                         onChange={(e) => handleInputChange('deedType', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
+                        className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
                       >
                         <option value="Warranty Deed">Warranty Deed</option>
                         <option value="Quitclaim Deed">Quitclaim Deed</option>
@@ -440,7 +440,7 @@ export const DeedGeneratorPage: React.FC = () => {
                       value={formData.legalDescription}
                       onChange={(e) => handleInputChange('legalDescription', e.target.value)}
                       rows={4}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20"
                       placeholder="Lot 1, Block 2, Subdivision Name, as recorded in Map Book 123, Page 45, Official Records of [County] County, [State]"
                     />
                   </div>
@@ -453,7 +453,7 @@ export const DeedGeneratorPage: React.FC = () => {
                       value={formData.specialConditions}
                       onChange={(e) => handleInputChange('specialConditions', e.target.value)}
                       rows={3}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20"
                       placeholder="Any special conditions, easements, or restrictions..."
                     />
                   </div>
@@ -475,7 +475,7 @@ export const DeedGeneratorPage: React.FC = () => {
                   <h2 className="text-2xl font-semibold text-white">Review & Generate</h2>
                 </div>
 
-                <div className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl p-6 border border-emerald-400/20">
+                <div className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 rounded-xl p-6 border border-emerald-400/20">
                   <h3 className="text-white font-semibold text-lg mb-4">Deed Summary</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div className="space-y-2">
@@ -514,7 +514,7 @@ export const DeedGeneratorPage: React.FC = () => {
                   disabled={isGenerating}
                   whileHover={{ scale: isGenerating ? 1 : 1.02 }}
                   whileTap={{ scale: isGenerating ? 1 : 0.98 }}
-                  className="w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
+                  className="w-full bg-linear-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
                 >
                   {isGenerating ? (
                     <>
@@ -555,7 +555,7 @@ export const DeedGeneratorPage: React.FC = () => {
                   onClick={nextStep}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+                  className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
                 >
                   <span>Next</span>
                   <ArrowRight className="h-4 w-4" />
@@ -587,7 +587,7 @@ export const DeedGeneratorPage: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl"
+              className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl"
             >
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-semibold text-white flex items-center space-x-2">
@@ -702,7 +702,7 @@ export const DeedGeneratorPage: React.FC = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                  className="flex-1 bg-linear-to-r from-emerald-500 to-blue-600 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <Download className="h-4 w-4" />
                   <span>Download Deed</span>

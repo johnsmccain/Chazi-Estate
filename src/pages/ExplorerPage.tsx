@@ -161,7 +161,7 @@ export const ExplorerPage: React.FC = () => {
     });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-900 to-indigo-900">
       {/* Header */}
       <header className="bg-white/10 backdrop-blur-lg border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -187,7 +187,7 @@ export const ExplorerPage: React.FC = () => {
 
             <Link
               to="/login"
-              className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
+              className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
             >
               Get Started
             </Link>
@@ -227,7 +227,7 @@ export const ExplorerPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 mb-8 shadow-2xl"
+            className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 mb-8 shadow-2xl"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Search */}
@@ -238,7 +238,7 @@ export const ExplorerPage: React.FC = () => {
                   placeholder="Search with love... 💚"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                 />
               </div>
 
@@ -248,7 +248,7 @@ export const ExplorerPage: React.FC = () => {
                 <select
                   value={filterType}
                   onChange={(e) => setFilterType(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
                 >
                   <option value="all">All Types 🏠</option>
                   <option value="residential">Residential 🏡</option>
@@ -263,7 +263,7 @@ export const ExplorerPage: React.FC = () => {
                 <select
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 appearance-none transition-all"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 appearance-none transition-all"
                 >
                   <option value="all">All Status ✨</option>
                   <option value="verified">Verified ✅</option>
@@ -278,7 +278,7 @@ export const ExplorerPage: React.FC = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 appearance-none transition-all"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 appearance-none transition-all"
                 >
                   <option value="newest">Newest First 🆕</option>
                   <option value="oldest">Oldest First 📅</option>
@@ -354,7 +354,7 @@ export const ExplorerPage: React.FC = () => {
                   setFilterType('all');
                   setFilterStatus('all');
                 }}
-                className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
+                className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
               >
                 Clear All Filters
               </button>
@@ -369,14 +369,14 @@ export const ExplorerPage: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4"
               onClick={() => setSelectedProperty(null)}
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-gradient-to-br from-slate-800 to-slate-900 border border-white/20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                className="bg-linear-to-br from-slate-800 to-slate-900 border border-white/20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="relative">
@@ -392,7 +392,7 @@ export const ExplorerPage: React.FC = () => {
                     <X className="h-6 w-6" />
                   </button>
                   <div className="absolute bottom-6 left-6">
-                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border backdrop-blur-sm ${
+                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border backdrop-blur-xs ${
                       selectedProperty.status === 'verified' 
                         ? 'text-emerald-400 bg-emerald-400/20 border-emerald-400/30'
                         : selectedProperty.status === 'pending'
@@ -418,7 +418,7 @@ export const ExplorerPage: React.FC = () => {
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-2xl p-6">
+                    <div className="bg-linear-to-br from-white/10 to-white/5 rounded-2xl p-6">
                       <h3 className="text-white font-semibold text-xl mb-4 flex items-center space-x-2">
                         <Home className="h-5 w-5 text-blue-400" />
                         <span>Property Details</span>
@@ -451,7 +451,7 @@ export const ExplorerPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-2xl p-6">
+                    <div className="bg-linear-to-br from-white/10 to-white/5 rounded-2xl p-6">
                       <h3 className="text-white font-semibold text-xl mb-4 flex items-center space-x-2">
                         <Shield className="h-5 w-5 text-purple-400" />
                         <span>Ownership & Blockchain</span>
@@ -480,7 +480,7 @@ export const ExplorerPage: React.FC = () => {
                   </div>
 
                   {selectedProperty.status === 'verified' && (
-                    <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-400/20 rounded-2xl p-6 mb-8">
+                    <div className="bg-linear-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-400/20 rounded-2xl p-6 mb-8">
                       <div className="flex items-center space-x-3 mb-3">
                         <CheckCircle className="h-6 w-6 text-emerald-400" />
                         <span className="text-emerald-400 font-semibold text-lg">Blockchain Verified with Love</span>
@@ -497,7 +497,7 @@ export const ExplorerPage: React.FC = () => {
                     <motion.button 
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2"
+                      className="flex-1 bg-linear-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2"
                     >
                       <Eye className="h-5 w-5" />
                       <span>View Full Record</span>
@@ -505,7 +505,7 @@ export const ExplorerPage: React.FC = () => {
                     </motion.button>
                     <Link
                       to="/login"
-                      className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2"
+                      className="flex-1 bg-linear-to-r from-purple-500 to-pink-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2"
                     >
                       <Sparkles className="h-5 w-5" />
                       <span>Get Started</span>
@@ -524,7 +524,7 @@ export const ExplorerPage: React.FC = () => {
           href="https://bolt.new"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center space-x-2 bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105"
+          className="flex items-center space-x-2 bg-linear-to-r from-emerald-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105"
         >
           <Zap className="h-4 w-4" />
           <span>Built with Bolt.new</span>

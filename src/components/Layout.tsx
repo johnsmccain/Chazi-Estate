@@ -22,7 +22,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
-    <div className="h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex ">
+    <div className="h-screen bg-linear-to-br from-slate-900 via-blue-900 to-indigo-900 flex ">
       {/* Sidebar */}
       <motion.div
               initial={false}
@@ -30,7 +30,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 x: sidebarOpen ? 0 : 0,
                 transition: { type: "spring", stiffness: 300, damping: 30 }
               }}
-              className={`fixed max-lg:hidden top-0 inset-y-0 left-0 z-50 overflow-y-scroll h-screen bg-gradient-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
+              className={`fixed max-lg:hidden top-0 inset-y-0 left-0 z-50 overflow-y-scroll h-screen bg-linear-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
             >
       <Sidebar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen}/>
       </motion.div>
@@ -41,7 +41,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 x: sidebarOpen ? 0 : -500,
                 transition: { type: "spring", stiffness: 300, damping: 30 }
               }}
-              className={`fixed lg:hidden top-0 inset-y-0 left-0 z-50 h-screen overflow-y-scroll bg-gradient-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
+              className={`fixed lg:hidden top-0 inset-y-0 left-0 z-50 h-screen overflow-y-scroll bg-linear-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
             >
       <Sidebar/>
       </motion.div>
@@ -125,7 +125,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 lg:hidden"
           />
         )}
       </AnimatePresence>

@@ -22,7 +22,7 @@ export const PropertyNotFound: React.FC = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-          className="w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl"
+          className="w-20 h-20 bg-linear-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl"
         >
           <AlertTriangle className="h-10 w-10 text-white" />
         </motion.div>
@@ -38,7 +38,7 @@ export const PropertyNotFound: React.FC = () => {
             onClick={() => navigate('/browse')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
+            className="w-full bg-linear-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
           >
             <Search className="h-5 w-5" />
             <span>Browse Available Properties</span>

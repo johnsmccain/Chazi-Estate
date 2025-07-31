@@ -25,7 +25,7 @@ export const Sidebar = ({sidebarOpen, setSidebarOpen}: any) => {
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
-              className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg"
+              className="w-10 h-10 bg-linear-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg"
             >
               <Building2 className="h-6 w-6 text-white" />
             </motion.div>
@@ -79,13 +79,13 @@ export const Sidebar = ({sidebarOpen, setSidebarOpen}: any) => {
                 onClick={() => setSidebarOpen(false)}
                 className={`group flex items-center space-x-4 p-4 rounded-2xl transition-all duration-300 ${
                   isActive(item.path)
-                    ? 'bg-gradient-to-r from-emerald-500/20 to-blue-500/20 border border-emerald-400/30 shadow-lg'
+                    ? 'bg-linear-to-r from-emerald-500/20 to-blue-500/20 border border-emerald-400/30 shadow-lg'
                     : 'hover:bg-white/5 hover:border-white/10 border border-transparent'
                 }`}
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`p-3 rounded-xl bg-gradient-to-br ${item.color} shadow-lg ${
+                  className={`p-3 rounded-xl bg-linear-to-br ${item.color} shadow-lg ${
                     isActive(item.path) ? 'shadow-emerald-500/25' : ''
                   }`}
                 >

@@ -180,14 +180,14 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+      className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
     >
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
           <motion.div
             animate={isAnalyzing ? { rotate: 360 } : {}}
             transition={{ duration: 2, repeat: isAnalyzing ? Infinity : 0, ease: "linear" }}
-            className="p-3 rounded-xl bg-gradient-to-br from-purple-400 to-blue-500 shadow-lg"
+            className="p-3 rounded-xl bg-linear-to-br from-purple-400 to-blue-500 shadow-lg"
           >
             <Brain className="h-6 w-6 text-white" />
           </motion.div>
@@ -202,7 +202,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
             onClick={startAnalysis}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+            className="bg-linear-to-r from-purple-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
           >
             <Zap className="h-4 w-4" />
             <span>Analyze Property</span>
@@ -227,7 +227,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
               </div>
               <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-purple-400 to-blue-500 rounded-full"
+                  className="h-full bg-linear-to-r from-purple-400 to-blue-500 rounded-full"
                   style={{ width: `${progress}%` }}
                   transition={{ duration: 0.1 }}
                 />
@@ -317,7 +317,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className={`inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br ${getScoreColor(analysis.overallScore)} shadow-2xl mb-4`}
+                className={`inline-flex items-center justify-center w-32 h-32 rounded-full bg-linear-to-br ${getScoreColor(analysis.overallScore)} shadow-2xl mb-4`}
               >
                 <div className="text-center">
                   <div className="text-3xl font-bold text-white">{analysis.overallScore}</div>
@@ -348,7 +348,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
 
             {/* Key Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl p-4 border border-emerald-400/20">
+              <div className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 rounded-xl p-4 border border-emerald-400/20">
                 <div className="flex items-center space-x-2 mb-2">
                   <TrendingUp className="h-4 w-4 text-emerald-400" />
                   <span className="text-emerald-300 text-sm font-medium">Expected Return</span>
@@ -359,7 +359,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
                 <p className="text-xs text-gray-400">Annual projected</p>
               </div>
 
-              <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-400/20">
+              <div className="bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-400/20">
                 <div className="flex items-center space-x-2 mb-2">
                   <Clock className="h-4 w-4 text-blue-400" />
                   <span className="text-blue-300 text-sm font-medium">Breakeven</span>
@@ -370,7 +370,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
                 <p className="text-xs text-gray-400">Years estimated</p>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-4 border border-purple-400/20">
+              <div className="bg-linear-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-4 border border-purple-400/20">
                 <div className="flex items-center space-x-2 mb-2">
                   <BarChart3 className="h-4 w-4 text-purple-400" />
                   <span className="text-purple-300 text-sm font-medium">Market Trend</span>
@@ -398,7 +398,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
                       transition={{ delay: idx * 0.1 }}
                       className="flex items-start space-x-2 text-sm text-gray-300"
                     >
-                      <Sparkles className="h-3 w-3 text-emerald-400 mt-0.5 flex-shrink-0" />
+                      <Sparkles className="h-3 w-3 text-emerald-400 mt-0.5 shrink-0" />
                       <span>{strength}</span>
                     </motion.div>
                   ))}
@@ -419,7 +419,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
                       transition={{ delay: idx * 0.1 }}
                       className="flex items-start space-x-2 text-sm text-gray-300"
                     >
-                      <Info className="h-3 w-3 text-amber-400 mt-0.5 flex-shrink-0" />
+                      <Info className="h-3 w-3 text-amber-400 mt-0.5 shrink-0" />
                       <span>{concern}</span>
                     </motion.div>
                   ))}
@@ -428,7 +428,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
             </div>
 
             {/* AI Recommendations */}
-            <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-6 border border-blue-400/20">
+            <div className="bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-6 border border-blue-400/20">
               <h3 className="text-white font-semibold mb-4 flex items-center space-x-2">
                 <Brain className="h-5 w-5 text-blue-400" />
                 <span>AI Recommendations</span>
@@ -443,7 +443,7 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
                     transition={{ delay: idx * 0.1 }}
                     className="flex items-start space-x-3 p-3 bg-white/5 rounded-lg"
                   >
-                    <div className="w-6 h-6 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                    <div className="w-6 h-6 bg-linear-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0">
                       {idx + 1}
                     </div>
                     <span className="text-gray-300 text-sm leading-relaxed">{rec}</span>

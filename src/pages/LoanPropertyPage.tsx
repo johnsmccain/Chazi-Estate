@@ -153,7 +153,7 @@ export const LoanPropertyPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg border border-blue-400/30 rounded-2xl p-8 shadow-2xl"
+        className="bg-linear-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg border border-blue-400/30 rounded-2xl p-8 shadow-2xl"
       >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
@@ -187,7 +187,7 @@ export const LoanPropertyPage: React.FC = () => {
                     value={propertyValue}
                     onChange={(e) => setPropertyValue(e.target.value)}
                     placeholder="$500,000"
-                    className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
+                    className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
                   />
                 </div>
                 
@@ -200,7 +200,7 @@ export const LoanPropertyPage: React.FC = () => {
                     value={downPayment}
                     onChange={(e) => setDownPayment(e.target.value)}
                     placeholder="$100,000"
-                    className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
+                    className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20"
                   />
                 </div>
               </div>
@@ -211,7 +211,7 @@ export const LoanPropertyPage: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="grid grid-cols-1 md:grid-cols-4 gap-4"
                 >
-                  <div className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl p-4 border border-emerald-400/20">
+                  <div className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 rounded-xl p-4 border border-emerald-400/20">
                     <div className="flex items-center space-x-2 mb-2">
                       <DollarSign className="h-4 w-4 text-emerald-400" />
                       <span className="text-emerald-300 text-sm font-medium">Loan Amount</span>
@@ -221,7 +221,7 @@ export const LoanPropertyPage: React.FC = () => {
                     </p>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-400/20">
+                  <div className="bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-400/20">
                     <div className="flex items-center space-x-2 mb-2">
                       <Calendar className="h-4 w-4 text-blue-400" />
                       <span className="text-blue-300 text-sm font-medium">Monthly Payment</span>
@@ -231,7 +231,7 @@ export const LoanPropertyPage: React.FC = () => {
                     </p>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-4 border border-purple-400/20">
+                  <div className="bg-linear-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-4 border border-purple-400/20">
                     <div className="flex items-center space-x-2 mb-2">
                       <Percent className="h-4 w-4 text-purple-400" />
                       <span className="text-purple-300 text-sm font-medium">LTV Ratio</span>
@@ -241,7 +241,7 @@ export const LoanPropertyPage: React.FC = () => {
                     </p>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-xl p-4 border border-amber-400/20">
+                  <div className="bg-linear-to-br from-amber-500/10 to-orange-500/10 rounded-xl p-4 border border-amber-400/20">
                     <div className="flex items-center space-x-2 mb-2">
                       <TrendingUp className="h-4 w-4 text-amber-400" />
                       <span className="text-amber-300 text-sm font-medium">Total Interest</span>
@@ -274,7 +274,7 @@ export const LoanPropertyPage: React.FC = () => {
             className="group cursor-pointer"
             onClick={() => setSelectedLoan(loan)}
           >
-            <div className={`bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 ${
+            <div className={`bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 ${
               selectedLoan?.id === loan.id 
                 ? 'border-blue-400/50 shadow-blue-500/25' 
                 : 'border-white/20 hover:border-blue-400/30'
@@ -282,7 +282,7 @@ export const LoanPropertyPage: React.FC = () => {
               {/* Loan Header */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-3">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${loan.color} shadow-lg`}>
+                  <div className={`p-3 rounded-xl bg-linear-to-br ${loan.color} shadow-lg`}>
                     <CreditCard className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -363,8 +363,8 @@ export const LoanPropertyPage: React.FC = () => {
                 whileTap={{ scale: 0.98 }}
                 className={`w-full py-3 px-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 ${
                   selectedLoan?.id === loan.id
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
-                    : 'bg-gradient-to-r from-gray-600 to-gray-700 text-white hover:from-blue-500 hover:to-purple-600'
+                    ? 'bg-linear-to-r from-blue-500 to-purple-600 text-white'
+                    : 'bg-linear-to-r from-gray-600 to-gray-700 text-white hover:from-blue-500 hover:to-purple-600'
                 }`}
               >
                 <span>{selectedLoan?.id === loan.id ? 'Selected' : 'Select Loan'}</span>
@@ -380,7 +380,7 @@ export const LoanPropertyPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl"
       >
         <div className="flex items-center space-x-3 mb-6">
           <FileText className="h-6 w-6 text-emerald-400" />
@@ -402,7 +402,7 @@ export const LoanPropertyPage: React.FC = () => {
               transition={{ delay: 0.1 * index }}
               className="text-center"
             >
-              <div className="bg-gradient-to-br from-emerald-400 to-blue-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold mx-auto mb-4 shadow-lg">
+              <div className="bg-linear-to-br from-emerald-400 to-blue-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold mx-auto mb-4 shadow-lg">
                 <item.icon className="h-8 w-8" />
               </div>
               <h3 className="text-white font-semibold text-lg mb-2">
@@ -424,7 +424,7 @@ export const LoanPropertyPage: React.FC = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-3 mx-auto"
+              className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-3 mx-auto"
             >
               <CreditCard className="h-5 w-5" />
               <span>Start Application with {selectedLoan.name}</span>
@@ -439,7 +439,7 @@ export const LoanPropertyPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
-        className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 backdrop-blur-lg border border-emerald-400/20 rounded-2xl p-8 shadow-xl"
+        className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 backdrop-blur-lg border border-emerald-400/20 rounded-2xl p-8 shadow-xl"
       >
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-white mb-4 flex items-center justify-center space-x-3">
@@ -480,7 +480,7 @@ export const LoanPropertyPage: React.FC = () => {
               transition={{ delay: 0.1 * index }}
               className="text-center"
             >
-              <div className={`p-4 rounded-2xl bg-gradient-to-br ${benefit.color} shadow-lg mx-auto mb-4 w-16 h-16 flex items-center justify-center`}>
+              <div className={`p-4 rounded-2xl bg-linear-to-br ${benefit.color} shadow-lg mx-auto mb-4 w-16 h-16 flex items-center justify-center`}>
                 <benefit.icon className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-white font-semibold text-xl mb-3">

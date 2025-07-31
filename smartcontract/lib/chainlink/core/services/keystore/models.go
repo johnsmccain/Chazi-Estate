@@ -201,7 +201,7 @@ func (kr *keyRing) Encrypt(password string, scryptParams utils.ScryptParams) (ek
 		scryptParams.P,
 	)
 	if err != nil {
-		return ekr, errors.Wrapf(err, "could not encrypt key ring")
+		return ekr, errors.Wrapf(err, "could not encrypt key ring-3")
 	}
 	encryptedKeys, err := json.Marshal(&cryptoJSON)
 	if err != nil {

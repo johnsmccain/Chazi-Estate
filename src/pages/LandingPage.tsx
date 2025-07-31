@@ -53,7 +53,7 @@ export const LandingPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/login"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
+                className="bg-linear-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
               >
                 <span>Get Started</span>
                 <ArrowRight className="h-5 w-5" />
@@ -141,7 +141,7 @@ export const LandingPage: React.FC = () => {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                <div className="bg-linear-to-r from-blue-500 to-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {index + 1}
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">
@@ -159,7 +159,7 @@ export const LandingPage: React.FC = () => {
           href="https://bolt.new"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-2 rounded-full text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          className="flex items-center space-x-2 bg-linear-to-r from-blue-500 to-purple-600 text-white px-3 py-2 rounded-full text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
           <Zap className="h-4 w-4" />
           <span>Built with Bolt.new</span>

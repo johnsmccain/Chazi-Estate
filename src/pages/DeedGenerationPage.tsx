@@ -157,7 +157,7 @@ export const DeedGenerationPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 mb-8 shadow-2xl"
+          className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 mb-8 shadow-2xl"
         >
           <h2 className="text-2xl font-semibold text-white mb-8 flex items-center space-x-2">
             <Zap className="h-6 w-6 text-amber-400" />
@@ -172,7 +172,7 @@ export const DeedGenerationPage: React.FC = () => {
                 transition={{ delay: 0.1 * index }}
                 className={`flex items-center space-x-6 p-6 rounded-2xl border transition-all duration-500 ${getStatusColor(getStepStatus(index))}`}
               >
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   {getStatusIcon(getStepStatus(index))}
                 </div>
                 <div className="flex-1">
@@ -183,7 +183,7 @@ export const DeedGenerationPage: React.FC = () => {
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    className={`w-8 h-8 rounded-full bg-gradient-to-r ${step.color}`}
+                    className={`w-8 h-8 rounded-full bg-linear-to-r ${step.color}`}
                   />
                 )}
               </motion.div>
@@ -197,7 +197,7 @@ export const DeedGenerationPage: React.FC = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+            className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
           >
             <div className="flex items-center space-x-3 mb-6">
               <Video className="h-6 w-6 text-purple-400" />
@@ -205,7 +205,7 @@ export const DeedGenerationPage: React.FC = () => {
               <Heart className="h-5 w-5 text-pink-400" />
             </div>
 
-            <div className="relative bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-2xl overflow-hidden mb-6 shadow-inner">
+            <div className="relative bg-linear-to-br from-purple-900/50 to-blue-900/50 rounded-2xl overflow-hidden mb-6 shadow-inner">
               <div className="aspect-video flex items-center justify-center">
                 <AnimatePresence mode="wait">
                   {!isVideoPlaying ? (
@@ -217,7 +217,7 @@ export const DeedGenerationPage: React.FC = () => {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       onClick={toggleVideo}
-                      className="bg-gradient-to-r from-purple-500 to-pink-600 backdrop-blur-lg border border-white/30 rounded-full p-6 hover:shadow-2xl transition-all duration-300"
+                      className="bg-linear-to-r from-purple-500 to-pink-600 backdrop-blur-lg border border-white/30 rounded-full p-6 hover:shadow-2xl transition-all duration-300"
                     >
                       <Play className="h-12 w-12 text-white ml-1" />
                     </motion.button>
@@ -261,7 +261,7 @@ export const DeedGenerationPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl p-6 border border-purple-400/20">
+            <div className="bg-linear-to-r from-purple-500/10 to-pink-500/10 rounded-xl p-6 border border-purple-400/20">
               <h3 className="text-white font-medium mb-3 flex items-center space-x-2">
                 <Sparkles className="h-4 w-4 text-amber-400" />
                 <span>Key Points Your AI Agent Covers:</span>
@@ -292,7 +292,7 @@ export const DeedGenerationPage: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 }}
-            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+            className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
           >
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-3">
@@ -308,7 +308,7 @@ export const DeedGenerationPage: React.FC = () => {
               </motion.button>
             </div>
 
-            <div className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-2xl p-8 space-y-6 border border-emerald-400/20">
+            <div className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 rounded-2xl p-8 space-y-6 border border-emerald-400/20">
               <div className="text-center border-b border-white/10 pb-6">
                 <motion.h3 
                   initial={{ opacity: 0 }}
@@ -365,7 +365,7 @@ export const DeedGenerationPage: React.FC = () => {
                   disabled={isLoading}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
+                  className="w-full bg-linear-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
                 >
                   {isLoading ? (
                     <LoadingSpinner size="sm" variant="blockchain" />
@@ -394,7 +394,7 @@ export const DeedGenerationPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mt-8 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 backdrop-blur-lg border border-emerald-400/30 rounded-2xl p-8 shadow-2xl"
+            className="mt-8 bg-linear-to-br from-emerald-500/20 to-blue-500/20 backdrop-blur-lg border border-emerald-400/30 rounded-2xl p-8 shadow-2xl"
           >
             <div className="flex items-center space-x-3 mb-6">
               <Shield className="h-8 w-8 text-emerald-400" />
@@ -407,7 +407,7 @@ export const DeedGenerationPage: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-2xl p-6 border border-emerald-400/20"
+                className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 rounded-2xl p-6 border border-emerald-400/20"
               >
                 <h3 className="text-white font-semibold text-lg mb-3 flex items-center space-x-2">
                   <CheckCircle className="h-5 w-5 text-emerald-400" />
@@ -423,7 +423,7 @@ export const DeedGenerationPage: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 }}
-                className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl p-6 border border-purple-400/20"
+                className="bg-linear-to-br from-purple-500/10 to-pink-500/10 rounded-2xl p-6 border border-purple-400/20"
               >
                 <h3 className="text-white font-semibold text-lg mb-3 flex items-center space-x-2">
                   <Clock className="h-5 w-5 text-purple-400 animate-pulse" />
@@ -439,7 +439,7 @@ export const DeedGenerationPage: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6 }}
-                className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-2xl p-6 border border-amber-400/20"
+                className="bg-linear-to-br from-amber-500/10 to-orange-500/10 rounded-2xl p-6 border border-amber-400/20"
               >
                 <h3 className="text-white font-semibold text-lg mb-3 flex items-center space-x-2">
                   <AlertCircle className="h-5 w-5 text-amber-400" />

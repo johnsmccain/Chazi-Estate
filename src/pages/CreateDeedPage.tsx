@@ -140,7 +140,7 @@ export const CreateDeedPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
       >
         <div className="flex items-center justify-between mb-8">
           {steps.map((step, index) => (
@@ -149,7 +149,7 @@ export const CreateDeedPage: React.FC = () => {
                 whileHover={{ scale: 1.1 }}
                 className={`flex items-center justify-center w-16 h-16 rounded-2xl transition-all duration-300 ${
                   index <= currentStep 
-                    ? `bg-gradient-to-br ${step.color} shadow-lg` 
+                    ? `bg-linear-to-br ${step.color} shadow-lg` 
                     : 'bg-gray-600 text-gray-300'
                 }`}
               >
@@ -173,7 +173,7 @@ export const CreateDeedPage: React.FC = () => {
               </div>
               {index < steps.length - 1 && (
                 <div className={`w-20 h-1 mx-4 rounded-full transition-all duration-300 ${
-                  index < currentStep ? 'bg-gradient-to-r from-emerald-400 to-blue-500' : 'bg-gray-600'
+                  index < currentStep ? 'bg-linear-to-r from-emerald-400 to-blue-500' : 'bg-gray-600'
                 }`} />
               )}
             </div>
@@ -185,7 +185,7 @@ export const CreateDeedPage: React.FC = () => {
             key={currentStep}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className={`inline-flex items-center space-x-3 px-6 py-3 rounded-2xl bg-gradient-to-r ${currentStepData.color} shadow-lg`}
+            className={`inline-flex items-center space-x-3 px-6 py-3 rounded-2xl bg-linear-to-r ${currentStepData.color} shadow-lg`}
           >
             <currentStepData.icon className="h-6 w-6 text-white" />
             <span className="text-white font-semibold text-lg">{currentStepData.title}</span>
@@ -199,7 +199,7 @@ export const CreateDeedPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <AnimatePresence mode="wait">
@@ -226,7 +226,7 @@ export const CreateDeedPage: React.FC = () => {
                     </label>
                     <input
                       {...register('address', { required: 'Address is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="123 Main Street"
                     />
                     {errors.address && (
@@ -240,7 +240,7 @@ export const CreateDeedPage: React.FC = () => {
                     </label>
                     <input
                       {...register('city', { required: 'City is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="San Francisco"
                     />
                     {errors.city && (
@@ -254,7 +254,7 @@ export const CreateDeedPage: React.FC = () => {
                     </label>
                     <input
                       {...register('state', { required: 'State is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="CA"
                     />
                     {errors.state && (
@@ -268,7 +268,7 @@ export const CreateDeedPage: React.FC = () => {
                     </label>
                     <input
                       {...register('zipCode', { required: 'ZIP code is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="94102"
                     />
                     {errors.zipCode && (
@@ -282,7 +282,7 @@ export const CreateDeedPage: React.FC = () => {
                     </label>
                     <select
                       {...register('propertyType', { required: 'Property type is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                     >
                       <option value="">Select Type</option>
                       <option value="residential">Residential 🏡</option>
@@ -302,7 +302,7 @@ export const CreateDeedPage: React.FC = () => {
                     <input
                       type="number"
                       {...register('squareFootage', { required: 'Square footage is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="2000"
                     />
                     {errors.squareFootage && (
@@ -317,7 +317,7 @@ export const CreateDeedPage: React.FC = () => {
                     <input
                       type="number"
                       {...register('bedrooms')}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="3"
                     />
                   </div>
@@ -330,7 +330,7 @@ export const CreateDeedPage: React.FC = () => {
                       type="number"
                       step="0.5"
                       {...register('bathrooms')}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="2"
                     />
                   </div>
@@ -342,7 +342,7 @@ export const CreateDeedPage: React.FC = () => {
                     <input
                       type="number"
                       {...register('estimatedValue', { required: 'Estimated value is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="750000"
                     />
                     {errors.estimatedValue && (
@@ -357,7 +357,7 @@ export const CreateDeedPage: React.FC = () => {
                     <textarea
                       {...register('description')}
                       rows={4}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                       placeholder="Describe the property's key features and condition..."
                     />
                   </div>
@@ -381,7 +381,7 @@ export const CreateDeedPage: React.FC = () => {
                   <Shield className="h-5 w-5 text-emerald-400" />
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-6 border border-blue-400/20 mb-6">
+                <div className="bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-6 border border-blue-400/20 mb-6">
                   <div className="flex items-center space-x-3 mb-3">
                     <Info className="h-5 w-5 text-blue-400" />
                     <span className="text-blue-300 font-semibold">Ownership Verification</span>
@@ -399,7 +399,7 @@ export const CreateDeedPage: React.FC = () => {
                     </label>
                     <input
                       {...register('ownerName', { required: 'Owner name is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                       placeholder="John Doe"
                     />
                     {errors.ownerName && (
@@ -414,7 +414,7 @@ export const CreateDeedPage: React.FC = () => {
                     <input
                       type="email"
                       {...register('ownerEmail', { required: 'Email is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                       placeholder="john@example.com"
                     />
                     {errors.ownerEmail && (
@@ -429,7 +429,7 @@ export const CreateDeedPage: React.FC = () => {
                     <input
                       type="tel"
                       {...register('ownerPhone', { required: 'Phone number is required' })}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                       placeholder="(555) 123-4567"
                     />
                     {errors.ownerPhone && (
@@ -476,7 +476,7 @@ export const CreateDeedPage: React.FC = () => {
                     />
                     <label
                       htmlFor="image-upload"
-                      className="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 cursor-pointer inline-flex items-center space-x-2"
+                      className="bg-linear-to-r from-purple-500 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 cursor-pointer inline-flex items-center space-x-2"
                     >
                       <Upload className="h-4 w-4" />
                       <span>Select Images</span>
@@ -530,7 +530,7 @@ export const CreateDeedPage: React.FC = () => {
                     />
                     <label
                       htmlFor="document-upload"
-                      className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 cursor-pointer inline-flex items-center space-x-2"
+                      className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 cursor-pointer inline-flex items-center space-x-2"
                     >
                       <Upload className="h-4 w-4" />
                       <span>Select Documents</span>
@@ -581,7 +581,7 @@ export const CreateDeedPage: React.FC = () => {
                   <Sparkles className="h-5 w-5 text-emerald-400" />
                 </div>
 
-                <div className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl p-6 border border-emerald-400/20">
+                <div className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 rounded-xl p-6 border border-emerald-400/20">
                   <div className="flex items-center space-x-3 mb-4">
                     <Zap className="h-5 w-5 text-emerald-400" />
                     <span className="text-emerald-300 font-semibold">Ready to Create Your Deed!</span>
@@ -621,7 +621,7 @@ export const CreateDeedPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-6">
+                <div className="bg-linear-to-br from-white/10 to-white/5 rounded-xl p-6">
                   <h3 className="text-white font-semibold text-lg mb-4 flex items-center space-x-2">
                     <Shield className="h-5 w-5 text-emerald-400" />
                     <span>What Happens Next?</span>
@@ -634,7 +634,7 @@ export const CreateDeedPage: React.FC = () => {
                       'Digital deed is created and secured forever'
                     ].map((step, index) => (
                       <div key={index} className="flex items-center space-x-3 text-gray-300">
-                        <div className="w-6 h-6 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                        <div className="w-6 h-6 bg-linear-to-br from-emerald-400 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
                           {index + 1}
                         </div>
                         <span>{step}</span>
@@ -669,7 +669,7 @@ export const CreateDeedPage: React.FC = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
               >
                 {isSubmitting ? (
                   <>
@@ -690,7 +690,7 @@ export const CreateDeedPage: React.FC = () => {
                 onClick={nextStep}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+                className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
               >
                 <span>Next</span>
                 <ArrowRight className="h-4 w-4" />

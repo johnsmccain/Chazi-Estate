@@ -204,7 +204,7 @@ export const RentPropertyPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
       >
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Search */}
@@ -215,7 +215,7 @@ export const RentPropertyPage: React.FC = () => {
               placeholder="Search by location... 🏠"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-hidden focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all"
             />
           </div>
 
@@ -225,7 +225,7 @@ export const RentPropertyPage: React.FC = () => {
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
             >
               <option value="all">All Types 🏠</option>
               <option value="apartment">Apartment 🏢</option>
@@ -241,7 +241,7 @@ export const RentPropertyPage: React.FC = () => {
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 appearance-none transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 appearance-none transition-all"
             >
               <option value="all">All Prices 💰</option>
               <option value="under-2000">Under $2,000</option>
@@ -289,7 +289,7 @@ export const RentPropertyPage: React.FC = () => {
               className="group cursor-pointer"
               onClick={() => setSelectedProperty(property)}
             >
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-green-400/30 transition-all duration-300">
+              <div className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-green-400/30 transition-all duration-300">
                 {/* Property Image */}
                 <div className="relative overflow-hidden">
                   <motion.img
@@ -300,7 +300,7 @@ export const RentPropertyPage: React.FC = () => {
                   
                   {/* Available Badge */}
                   <div className="absolute top-4 left-4">
-                    <div className="bg-green-500/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center space-x-1">
+                    <div className="bg-green-500/80 backdrop-blur-xs text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center space-x-1">
                       <CheckCircle className="h-3 w-3" />
                       <span>Available</span>
                     </div>
@@ -308,7 +308,7 @@ export const RentPropertyPage: React.FC = () => {
 
                   {/* Rating Badge */}
                   <div className="absolute top-4 right-4">
-                    <div className="bg-amber-500/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold flex items-center space-x-1">
+                    <div className="bg-amber-500/80 backdrop-blur-xs text-white px-3 py-1 rounded-full text-sm font-bold flex items-center space-x-1">
                       <Star className="h-3 w-3 fill-current" />
                       <span>{property.rating}</span>
                     </div>
@@ -317,12 +317,12 @@ export const RentPropertyPage: React.FC = () => {
                   {/* Special Features */}
                   <div className="absolute bottom-4 left-4 flex space-x-2">
                     {property.furnished && (
-                      <div className="bg-purple-500/80 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium">
+                      <div className="bg-purple-500/80 backdrop-blur-xs text-white px-2 py-1 rounded-full text-xs font-medium">
                         🛋️ Furnished
                       </div>
                     )}
                     {property.petFriendly && (
-                      <div className="bg-blue-500/80 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium">
+                      <div className="bg-blue-500/80 backdrop-blur-xs text-white px-2 py-1 rounded-full text-xs font-medium">
                         🐕 Pet Friendly
                       </div>
                     )}
@@ -348,7 +348,7 @@ export const RentPropertyPage: React.FC = () => {
                     </div>
                     
                     <div className="bg-white/5 rounded-lg p-3 text-center">
-                      <div className="w-4 h-4 bg-purple-400 rounded mx-auto mb-1"></div>
+                      <div className="w-4 h-4 bg-purple-400 rounded-sm mx-auto mb-1"></div>
                       <p className="text-white font-semibold text-sm">{property.bathrooms}</p>
                       <p className="text-gray-300 text-xs">Baths</p>
                     </div>
@@ -375,7 +375,7 @@ export const RentPropertyPage: React.FC = () => {
                   </div>
 
                   {/* Pricing */}
-                  <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg p-4 mb-4 border border-green-400/20">
+                  <div className="bg-linear-to-r from-green-500/10 to-emerald-500/10 rounded-lg p-4 mb-4 border border-green-400/20">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-green-300 text-sm">Monthly Rent</p>
@@ -404,7 +404,7 @@ export const RentPropertyPage: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                    className="w-full bg-linear-to-r from-green-500 to-emerald-600 text-white py-3 px-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
                   >
                     <Key className="h-4 w-4" />
                     <span>View & Apply</span>
@@ -424,14 +424,14 @@ export const RentPropertyPage: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedProperty(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 border border-white/20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="bg-linear-to-br from-slate-800 to-slate-900 border border-white/20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
@@ -466,7 +466,7 @@ export const RentPropertyPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Property Details */}
                   <div className="space-y-6">
-                    <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-6">
+                    <div className="bg-linear-to-br from-white/10 to-white/5 rounded-xl p-6">
                       <h3 className="text-white font-semibold text-xl mb-4">Property Details</h3>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
@@ -488,7 +488,7 @@ export const RentPropertyPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-6">
+                    <div className="bg-linear-to-br from-white/10 to-white/5 rounded-xl p-6">
                       <h3 className="text-white font-semibold text-xl mb-4">Amenities</h3>
                       <div className="grid grid-cols-2 gap-2">
                         {selectedProperty.amenities.map((amenity, idx) => (
@@ -507,7 +507,7 @@ export const RentPropertyPage: React.FC = () => {
 
                   {/* Lease Information */}
                   <div className="space-y-6">
-                    <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl p-6 border border-green-400/20">
+                    <div className="bg-linear-to-br from-green-500/10 to-emerald-500/10 rounded-xl p-6 border border-green-400/20">
                       <h3 className="text-white font-semibold text-xl mb-4">Lease Information</h3>
                       <div className="space-y-3">
                         <div className="flex justify-between">
@@ -531,14 +531,14 @@ export const RentPropertyPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-6">
+                    <div className="bg-linear-to-br from-white/10 to-white/5 rounded-xl p-6">
                       <h3 className="text-white font-semibold text-xl mb-4">Utilities & Features</h3>
                       <div className="space-y-3">
                         <div>
                           <span className="text-gray-400 text-sm">Included Utilities:</span>
                           <div className="flex flex-wrap gap-2 mt-1">
                             {selectedProperty.utilities.map((utility, idx) => (
-                              <span key={idx} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-sm">
+                              <span key={idx} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-sm text-sm">
                                 {utility}
                               </span>
                             ))}
@@ -568,7 +568,7 @@ export const RentPropertyPage: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                    className="flex-1 bg-linear-to-r from-green-500 to-emerald-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
                   >
                     <Key className="h-5 w-5" />
                     <span>Apply Now</span>
@@ -606,7 +606,7 @@ export const RentPropertyPage: React.FC = () => {
               setFilterType('all');
               setPriceRange('all');
             }}
-            className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
+            className="bg-linear-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
           >
             Clear All Filters
           </button>

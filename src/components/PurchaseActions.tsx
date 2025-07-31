@@ -30,7 +30,7 @@ export const PurchaseActions: React.FC<PurchaseActionsProps> = ({
   return (
     <div className="space-y-6">
       {/* Security Notice */}
-      <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-xl p-4 border border-emerald-400/20">
+      <div className="bg-linear-to-r from-emerald-500/10 to-blue-500/10 rounded-xl p-4 border border-emerald-400/20">
         <div className="flex items-center space-x-2 mb-2">
           <Shield className="h-5 w-5 text-emerald-400" />
           <span className="text-emerald-300 font-medium">Blockchain Security</span>
@@ -71,7 +71,7 @@ export const PurchaseActions: React.FC<PurchaseActionsProps> = ({
         disabled={!calculatedShares || calculatedShares === 0 || isPurchasing || !isAuthenticated}
         whileHover={{ scale: calculatedShares > 0 && !isPurchasing ? 1.02 : 1 }}
         whileTap={{ scale: calculatedShares > 0 && !isPurchasing ? 0.98 : 1 }}
-        className="w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2"
+        className="w-full bg-linear-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2"
       >
         {isPurchasing ? (
           <>

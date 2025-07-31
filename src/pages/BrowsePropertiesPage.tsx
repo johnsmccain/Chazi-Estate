@@ -429,14 +429,14 @@ export const BrowsePropertiesPage: React.FC = () => {
           </h1>
         </div>
         
-        <div className="bg-gradient-to-br from-red-500/20 to-pink-500/20 backdrop-blur-lg border border-red-400/30 rounded-2xl p-8 text-center">
+        <div className="bg-linear-to-br from-red-500/20 to-pink-500/20 backdrop-blur-lg border border-red-400/30 rounded-2xl p-8 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">Oops! Something went wrong</h2>
           <p className="text-gray-300 mb-6">{error}</p>
           <motion.button
             onClick={loadProperties}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2 mx-auto"
+            className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2 mx-auto"
           >
             <RefreshCw className="h-5 w-5" />
             <span>Try Again</span>
@@ -488,7 +488,7 @@ export const BrowsePropertiesPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
       >
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 mb-6">
           {/* Search */}
@@ -499,7 +499,7 @@ export const BrowsePropertiesPage: React.FC = () => {
               placeholder="AI-powered search... 🧠"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
             />
           </div>
 
@@ -509,7 +509,7 @@ export const BrowsePropertiesPage: React.FC = () => {
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
             >
               {propertyTypes.map(type => (
                 <option key={type.value} value={type.value}>{type.label}</option>
@@ -523,7 +523,7 @@ export const BrowsePropertiesPage: React.FC = () => {
             <select
               value={filterOwnership}
               onChange={(e) => setFilterOwnership(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 appearance-none transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 appearance-none transition-all"
             >
               <option value="all">All Ownership 👥</option>
               <option value="full">Full Ownership 🏠</option>
@@ -538,7 +538,7 @@ export const BrowsePropertiesPage: React.FC = () => {
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 appearance-none transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 appearance-none transition-all"
             >
               <option value="all">All Prices 💰</option>
               <option value="under-1m">Under $1M</option>
@@ -554,7 +554,7 @@ export const BrowsePropertiesPage: React.FC = () => {
             <select
               value={filterAvailability}
               onChange={(e) => setFilterAvailability(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 appearance-none transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 appearance-none transition-all"
             >
               <option value="all">All Available ✨</option>
               <option value="fraction">Fractions 🥧</option>
@@ -570,7 +570,7 @@ export const BrowsePropertiesPage: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 appearance-none transition-all"
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 appearance-none transition-all"
             >
               <option value="ai-recommended">🧠 AI Recommended</option>
               <option value="newest">Newest First 🆕</option>
@@ -596,7 +596,7 @@ export const BrowsePropertiesPage: React.FC = () => {
                 onClick={() => setFilterType(filterType === type.value ? 'all' : type.value)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 ${
                   filterType === type.value
-                    ? 'bg-gradient-to-r from-emerald-500 to-blue-600 text-white shadow-lg'
+                    ? 'bg-linear-to-r from-emerald-500 to-blue-600 text-white shadow-lg'
                     : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white'
                 }`}
               >
@@ -697,7 +697,7 @@ export const BrowsePropertiesPage: React.FC = () => {
                     <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10"
+                      className="absolute -top-2 -right-2 bg-linear-to-r from-purple-500 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10"
                     >
                       <div className="flex items-center space-x-1">
                         <Brain className="h-3 w-3" />
@@ -714,7 +714,7 @@ export const BrowsePropertiesPage: React.FC = () => {
                     }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-blue-600 text-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
+                    className="absolute top-4 right-4 bg-linear-to-r from-purple-500 to-blue-600 text-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
                   >
                     <Zap className="h-4 w-4" />
                   </motion.button>
@@ -776,14 +776,14 @@ export const BrowsePropertiesPage: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedPropertyForAnalysis(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 border border-white/20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="bg-linear-to-br from-slate-800 to-slate-900 border border-white/20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="p-6">
@@ -834,7 +834,7 @@ export const BrowsePropertiesPage: React.FC = () => {
               setPriceRange('all');
               setSortBy('ai-recommended');
             }}
-            className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
+            className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
           >
             Reset Filters & Get AI Recommendations
           </button>

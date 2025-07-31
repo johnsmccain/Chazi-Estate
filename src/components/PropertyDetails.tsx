@@ -22,7 +22,7 @@ export const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) =>
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.4 }}
-      className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+      className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
     >
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">

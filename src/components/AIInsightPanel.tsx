@@ -165,14 +165,14 @@ export const AIInsightPanel: React.FC<AIInsightPanelProps> = ({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl ${className}`}
+      className={`bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl ${className}`}
     >
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
           <motion.div
             animate={isGenerating ? { rotate: 360 } : {}}
             transition={{ duration: 2, repeat: isGenerating ? Infinity : 0, ease: "linear" }}
-            className="p-3 rounded-xl bg-gradient-to-br from-purple-400 to-blue-500 shadow-lg"
+            className="p-3 rounded-xl bg-linear-to-br from-purple-400 to-blue-500 shadow-lg"
           >
             <Brain className="h-6 w-6 text-white" />
           </motion.div>
@@ -190,7 +190,7 @@ export const AIInsightPanel: React.FC<AIInsightPanelProps> = ({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           disabled={isGenerating}
-          className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-4 py-2 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2 disabled:opacity-50"
+          className="bg-linear-to-r from-purple-500 to-blue-600 text-white px-4 py-2 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2 disabled:opacity-50"
         >
           <Zap className="h-4 w-4" />
           <span>Refresh</span>
@@ -238,7 +238,7 @@ export const AIInsightPanel: React.FC<AIInsightPanelProps> = ({
                   className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group"
                 >
                   <div className="flex items-start space-x-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${insight.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`p-3 rounded-xl bg-linear-to-br ${insight.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <IconComponent className="h-5 w-5 text-white" />
                     </div>
                     
@@ -303,18 +303,18 @@ export const AIInsightPanel: React.FC<AIInsightPanelProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedInsight(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 border border-white/20 rounded-2xl max-w-2xl w-full p-8 shadow-2xl"
+              className="bg-linear-to-br from-slate-800 to-slate-900 border border-white/20 rounded-2xl max-w-2xl w-full p-8 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center space-x-4 mb-6">
-                <div className={`p-4 rounded-xl bg-gradient-to-br ${selectedInsight.color} shadow-lg`}>
+                <div className={`p-4 rounded-xl bg-linear-to-br ${selectedInsight.color} shadow-lg`}>
                   <selectedInsight.icon className="h-8 w-8 text-white" />
                 </div>
                 <div>
@@ -349,22 +349,22 @@ export const AIInsightPanel: React.FC<AIInsightPanelProps> = ({
                 </div>
 
                 {selectedInsight.actionable && (
-                  <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-xl p-6 border border-emerald-400/20">
+                  <div className="bg-linear-to-r from-emerald-500/10 to-blue-500/10 rounded-xl p-6 border border-emerald-400/20">
                     <div className="flex items-center space-x-2 mb-3">
                       <Lightbulb className="h-5 w-5 text-emerald-400" />
                       <span className="text-emerald-300 font-semibold">Recommended Actions</span>
                     </div>
                     <ul className="space-y-2 text-gray-300 text-sm">
                       <li className="flex items-start space-x-2">
-                        <Heart className="h-3 w-3 text-pink-400 mt-1 flex-shrink-0" />
+                        <Heart className="h-3 w-3 text-pink-400 mt-1 shrink-0" />
                         <span>Monitor this insight closely for optimal timing</span>
                       </li>
                       <li className="flex items-start space-x-2">
-                        <Heart className="h-3 w-3 text-pink-400 mt-1 flex-shrink-0" />
+                        <Heart className="h-3 w-3 text-pink-400 mt-1 shrink-0" />
                         <span>Consider adjusting your investment strategy accordingly</span>
                       </li>
                       <li className="flex items-start space-x-2">
-                        <Heart className="h-3 w-3 text-pink-400 mt-1 flex-shrink-0" />
+                        <Heart className="h-3 w-3 text-pink-400 mt-1 shrink-0" />
                         <span>Consult with our AI advisor for personalized guidance</span>
                       </li>
                     </ul>
@@ -377,7 +377,7 @@ export const AIInsightPanel: React.FC<AIInsightPanelProps> = ({
                   onClick={() => setSelectedInsight(null)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
+                  className="bg-linear-to-r from-purple-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
                 >
                   Close
                 </motion.button>

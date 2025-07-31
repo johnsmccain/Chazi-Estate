@@ -197,10 +197,10 @@ export const DAODashboardPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * index }}
             whileHover={{ y: -5, scale: 1.02 }}
-            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300"
+            className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg`}>
+              <div className={`p-3 rounded-xl bg-linear-to-br ${stat.color} shadow-lg`}>
                 <stat.icon className="h-6 w-6 text-white" />
               </div>
               <Sparkles className="h-4 w-4 text-amber-400" />
@@ -224,7 +224,7 @@ export const DAODashboardPage: React.FC = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setShowCreateModal(true)}
-          className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+          className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
         >
           <Plus className="h-5 w-5" />
           <span>Create Proposal</span>
@@ -255,11 +255,11 @@ export const DAODashboardPage: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index }}
-              className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300"
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-blue-400 to-purple-500 shadow-lg">
+                  <div className="p-3 rounded-xl bg-linear-to-br from-blue-400 to-purple-500 shadow-lg">
                     <TypeIcon className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -367,7 +367,7 @@ export const DAODashboardPage: React.FC = () => {
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleVote(proposal.id, 'for', 10)} // Mock voting power
                         disabled={isVoting}
-                        className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-2 rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2 disabled:opacity-50"
+                        className="bg-linear-to-r from-emerald-500 to-green-600 text-white px-6 py-2 rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2 disabled:opacity-50"
                       >
                         <ThumbsUp className="h-4 w-4" />
                         <span>Vote For</span>
@@ -378,7 +378,7 @@ export const DAODashboardPage: React.FC = () => {
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleVote(proposal.id, 'against', 10)} // Mock voting power
                         disabled={isVoting}
-                        className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-2 rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2 disabled:opacity-50"
+                        className="bg-linear-to-r from-red-500 to-pink-600 text-white px-6 py-2 rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2 disabled:opacity-50"
                       >
                         <ThumbsDown className="h-4 w-4" />
                         <span>Vote Against</span>
@@ -424,7 +424,7 @@ export const DAODashboardPage: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowCreateModal(true)}
-            className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2 mx-auto"
+            className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2 mx-auto"
           >
             <Plus className="h-5 w-5" />
             <span>Create First Proposal</span>

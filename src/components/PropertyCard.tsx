@@ -94,7 +94,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
       transition={{ duration: 0.3 }}
       onClick={onClick}
       className={`
-        bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg 
+        bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg 
         border border-white/20 rounded-2xl overflow-hidden shadow-xl
         hover:shadow-2xl hover:border-emerald-400/30 transition-all duration-300
         cursor-pointer group
@@ -114,7 +114,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         <div className="absolute top-4 left-4">
           <div className={`
             inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-            border backdrop-blur-sm ${statusConfig.color}
+            border backdrop-blur-xs ${statusConfig.color}
           `}>
             <StatusIcon className="h-3 w-3 mr-1" />
             {statusConfig.label}
@@ -123,7 +123,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
         {/* Property Type Badge */}
         <div className="absolute top-4 right-4">
-          <div className="bg-blue-500/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
+          <div className="bg-blue-500/80 backdrop-blur-xs text-white px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
             <TypeIcon className="h-3 w-3" />
             <span>{property.type}</span>
           </div>
@@ -132,7 +132,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         {/* User Ownership Badge */}
         {userShares > 0 && (
           <div className="absolute bottom-4 left-4">
-            <div className="bg-gradient-to-r from-purple-500/80 to-pink-500/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold">
+            <div className="bg-linear-to-r from-purple-500/80 to-pink-500/80 backdrop-blur-xs text-white px-3 py-1 rounded-full text-xs font-bold">
               <span>You own {ownershipPercentage.toFixed(1)}%</span>
             </div>
           </div>
@@ -141,7 +141,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         {/* Availability Badge */}
         {property.available_shares && property.available_shares > 0 && (
           <div className="absolute bottom-4 right-4">
-            <div className="bg-emerald-500/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
+            <div className="bg-emerald-500/80 backdrop-blur-xs text-white px-3 py-1 rounded-full text-xs font-medium">
               {availablePercentage.toFixed(0)}% Available
             </div>
           </div>
@@ -150,12 +150,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         {/* Rating and Views */}
         <div className="absolute top-16 right-4 flex flex-col space-y-2">
           {property.rating && (
-            <div className="bg-amber-500/80 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
+            <div className="bg-amber-500/80 backdrop-blur-xs text-white px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
               <Star className="h-3 w-3 fill-current" />
               <span>{property.rating}</span>
             </div>
           )}
-          <div className="bg-gray-500/80 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
+          <div className="bg-gray-500/80 backdrop-blur-xs text-white px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
             <Eye className="h-3 w-3" />
             <span>{property.views}</span>
           </div>
@@ -165,7 +165,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         <motion.div
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
-          className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end justify-center pb-4"
+          className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent flex items-end justify-center pb-4"
         >
           <div className="flex items-center space-x-2 text-white">
             <Eye className="h-4 w-4" />
@@ -230,7 +230,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             </div>
             <div className="w-full bg-purple-900/30 rounded-full h-2">
               <div 
-                className="bg-gradient-to-r from-purple-400 to-pink-500 h-2 rounded-full"
+                className="bg-linear-to-r from-purple-400 to-pink-500 h-2 rounded-full"
                 style={{ width: `${((property.total_shares - (property.available_shares || 0)) / property.total_shares) * 100}%` }}
               />
             </div>
@@ -308,7 +308,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
         {/* Blockchain Info */}
         {property.blockchain_token_id && (
-          <div className="mb-4 p-3 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-lg border border-emerald-400/20">
+          <div className="mb-4 p-3 bg-linear-to-r from-emerald-500/10 to-blue-500/10 rounded-lg border border-emerald-400/20">
             <div className="flex items-center space-x-2 mb-1">
               <Shield className="h-4 w-4 text-emerald-400" />
               <span className="text-emerald-300 text-xs font-medium">Blockchain Secured</span>
@@ -338,7 +338,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-gradient-to-r from-purple-500 to-pink-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
+              className="bg-linear-to-r from-purple-500 to-pink-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
             >
               <PieChart className="h-3 w-3" />
               <span>Buy</span>
@@ -348,7 +348,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-gradient-to-r from-green-500 to-emerald-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
+              className="bg-linear-to-r from-green-500 to-emerald-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
             >
               <Key className="h-3 w-3" />
               <span>Rent</span>
@@ -358,7 +358,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
+              className="bg-linear-to-r from-blue-500 to-indigo-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
             >
               <CreditCard className="h-3 w-3" />
               <span>Loan</span>
@@ -369,7 +369,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="col-span-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
+              className="col-span-3 bg-linear-to-r from-gray-600 to-gray-700 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
             >
               <Eye className="h-4 w-4" />
               <span>View Details</span>

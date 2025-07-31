@@ -428,7 +428,7 @@ export const PropertyUploadPage: React.FC = () => {
               {currentStep === steps.length - 1 ? (
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl transition-all duration-300"
+                  className="bg-linear-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl transition-all duration-300"
                 >
                   Generate Deed
                 </button>
@@ -436,7 +436,7 @@ export const PropertyUploadPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl transition-all duration-300"
+                  className="bg-linear-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl transition-all duration-300"
                 >
                   Next
                 </button>

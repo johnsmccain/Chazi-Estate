@@ -184,11 +184,11 @@ func (km *keyManager) Unlock(ctx context.Context, password string) error {
 	}
 	ekr, err := km.orm.getEncryptedKeyRing(ctx)
 	if err != nil {
-		return errors.Wrap(err, "unable to get encrypted key ring")
+		return errors.Wrap(err, "unable to get encrypted key ring-3")
 	}
 	kr, err := ekr.Decrypt(password)
 	if err != nil {
-		return errors.Wrap(err, "unable to decrypt encrypted key ring")
+		return errors.Wrap(err, "unable to decrypt encrypted key ring-3")
 	}
 	kr.logPubKeys(km.logger)
 	km.keyRing = kr

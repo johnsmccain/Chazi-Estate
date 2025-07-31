@@ -69,7 +69,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
         {/* Pulsing Background */}
         <motion.div
-          className={`absolute inset-0 rounded-full bg-gradient-to-r ${config.colors} opacity-20`}
+          className={`absolute inset-0 rounded-full bg-linear-to-r ${config.colors} opacity-20`}
           animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
@@ -109,7 +109,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
           className="w-48 h-1 bg-white/20 rounded-full overflow-hidden"
         >
           <motion.div
-            className="h-full bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full"
+            className="h-full bg-linear-to-r from-emerald-400 to-blue-500 rounded-full"
             animate={{ x: ['-100%', '100%'] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           />

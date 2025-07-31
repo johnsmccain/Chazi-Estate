@@ -162,7 +162,7 @@ export const MyPropertiesPage: React.FC = () => {
         </div>
         <Link
           to="/create-deed"
-          className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+          className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
         >
           <Plus className="h-5 w-5" />
           <span>Add Property</span>
@@ -178,10 +178,10 @@ export const MyPropertiesPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
             whileHover={{ y: -5, scale: 1.02 }}
-            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300"
+            className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg`}>
+              <div className={`p-3 rounded-xl bg-linear-to-br ${stat.color} shadow-lg`}>
                 <stat.icon className="h-6 w-6 text-white" />
               </div>
               <Sparkles className="h-4 w-4 text-amber-400" />
@@ -200,7 +200,7 @@ export const MyPropertiesPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl"
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -216,7 +216,7 @@ export const MyPropertiesPage: React.FC = () => {
                 onClick={() => setFilterStatus(status)}
                 className={`px-4 py-2 rounded-xl transition-all duration-300 ${
                   filterStatus === status
-                    ? 'bg-gradient-to-r from-emerald-500 to-blue-600 text-white shadow-lg'
+                    ? 'bg-linear-to-r from-emerald-500 to-blue-600 text-white shadow-lg'
                     : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white'
                 }`}
               >
@@ -246,7 +246,7 @@ export const MyPropertiesPage: React.FC = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group"
             >
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-emerald-400/30 transition-all duration-300">
+              <div className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-emerald-400/30 transition-all duration-300">
                 {/* Property Image */}
                 <div className="relative overflow-hidden">
                   <motion.img
@@ -258,14 +258,14 @@ export const MyPropertiesPage: React.FC = () => {
                   
                   {/* Ownership Badge */}
                   <div className="absolute top-4 left-4">
-                    <div className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                    <div className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                       {property.ownership}% Owned
                     </div>
                   </div>
 
                   {/* Status Badge */}
                   <div className="absolute top-4 right-4">
-                    <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border backdrop-blur-sm ${
+                    <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border backdrop-blur-xs ${
                       property.status === 'verified' 
                         ? 'text-emerald-400 bg-emerald-400/20 border-emerald-400/30'
                         : property.status === 'pending'
@@ -284,7 +284,7 @@ export const MyPropertiesPage: React.FC = () => {
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/30 transition-colors"
+                      className="bg-white/20 backdrop-blur-xs text-white p-2 rounded-full hover:bg-white/30 transition-colors"
                     >
                       <MoreVertical className="h-4 w-4" />
                     </motion.button>
@@ -352,7 +352,7 @@ export const MyPropertiesPage: React.FC = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
+                      className="flex-1 bg-linear-to-r from-blue-500 to-purple-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
                     >
                       <Eye className="h-3 w-3" />
                       <span>View</span>
@@ -360,7 +360,7 @@ export const MyPropertiesPage: React.FC = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
+                      className="flex-1 bg-linear-to-r from-emerald-500 to-blue-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
                     >
                       <Edit className="h-3 w-3" />
                       <span>Edit</span>
@@ -368,7 +368,7 @@ export const MyPropertiesPage: React.FC = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="bg-gradient-to-r from-purple-500 to-pink-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center"
+                      className="bg-linear-to-r from-purple-500 to-pink-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center"
                     >
                       <Share2 className="h-3 w-3" />
                     </motion.button>
@@ -396,7 +396,7 @@ export const MyPropertiesPage: React.FC = () => {
           </p>
           <Link
             to="/create-deed"
-            className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 inline-flex items-center space-x-2"
+            className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 inline-flex items-center space-x-2"
           >
             <Plus className="h-5 w-5" />
             <span>Add Your First Property</span>

@@ -112,7 +112,7 @@ export const DashboardPage: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="relative overflow-hidden"
       >
-        <div className="bg-gradient-to-br from-emerald-500/20 to-blue-500/20 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl">
+        <div className="bg-linear-to-br from-emerald-500/20 to-blue-500/20 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl">
           <div className="flex items-center justify-between mb-6">
             <div>
               <motion.h1 
@@ -139,7 +139,7 @@ export const DashboardPage: React.FC = () => {
                 onClick={() => setShowAIAssistant(!showAIAssistant)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+                className="bg-linear-to-r from-purple-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
               >
                 <Brain className="h-5 w-5" />
                 <span>{showAIAssistant ? 'Hide' : 'Show'} AI Assistant</span>
@@ -151,7 +151,7 @@ export const DashboardPage: React.FC = () => {
                 transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
                 className="hidden md:block"
               >
-                <div className="w-24 h-24 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl">
+                <div className="w-24 h-24 bg-linear-to-br from-emerald-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl">
                   <Sparkles className="h-12 w-12 text-white" />
                 </div>
               </motion.div>
@@ -210,11 +210,11 @@ export const DashboardPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl"
+          className="bg-linear-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-linear-to-br from-purple-400 to-blue-500 rounded-xl flex items-center justify-center">
                 <Wallet className="h-6 w-6 text-white" />
               </div>
               <div>
@@ -227,7 +227,7 @@ export const DashboardPage: React.FC = () => {
               disabled={isLoading}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 disabled:opacity-50"
+              className="bg-linear-to-r from-purple-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 disabled:opacity-50"
             >
               {isLoading ? <LoadingSpinner size="sm" /> : 'Connect Wallet'}
             </motion.button>
@@ -244,10 +244,10 @@ export const DashboardPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
             whileHover={{ y: -5, scale: 1.02 }}
-            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 group"
+            className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 group"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`p-3 rounded-xl bg-linear-to-br ${stat.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                 <stat.icon className="h-6 w-6 text-white" />
               </div>
               <div className="flex items-center space-x-1">
@@ -281,7 +281,7 @@ export const DashboardPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl"
       >
         <h2 className="text-2xl font-semibold text-white mb-6 flex items-center space-x-2">
           <Zap className="h-6 w-6 text-amber-400" />
@@ -292,7 +292,7 @@ export const DashboardPage: React.FC = () => {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               to="/upload"
-              className="flex items-center space-x-4 p-6 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-xl hover:shadow-2xl transition-all duration-300 group"
+              className="flex items-center space-x-4 p-6 bg-linear-to-r from-emerald-500 to-blue-600 rounded-xl hover:shadow-2xl transition-all duration-300 group"
             >
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center group-hover:bg-white/30 transition-colors">
                 <Plus className="h-6 w-6 text-white" />
@@ -307,7 +307,7 @@ export const DashboardPage: React.FC = () => {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               to="/browse"
-              className="flex items-center space-x-4 p-6 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl hover:shadow-2xl transition-all duration-300 group"
+              className="flex items-center space-x-4 p-6 bg-linear-to-r from-purple-500 to-pink-600 rounded-xl hover:shadow-2xl transition-all duration-300 group"
             >
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center group-hover:bg-white/30 transition-colors">
                 <Target className="h-6 w-6 text-white" />
@@ -320,7 +320,7 @@ export const DashboardPage: React.FC = () => {
           </motion.div>
 
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <button className="flex items-center space-x-4 p-6 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl hover:shadow-2xl transition-all duration-300 group w-full">
+            <button className="flex items-center space-x-4 p-6 bg-linear-to-r from-amber-500 to-orange-600 rounded-xl hover:shadow-2xl transition-all duration-300 group w-full">
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center group-hover:bg-white/30 transition-colors">
                 <Brain className="h-6 w-6 text-white" />
               </div>
@@ -338,7 +338,7 @@ export const DashboardPage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
-        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl"
+        className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl"
       >
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-semibold text-white flex items-center space-x-2">
@@ -387,7 +387,7 @@ export const DashboardPage: React.FC = () => {
             </p>
             <Link
               to="/upload"
-              className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 inline-flex items-center space-x-2"
+              className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 inline-flex items-center space-x-2"
             >
               <Brain className="h-5 w-5" />
               <span>Add Your First Property</span>
@@ -402,7 +402,7 @@ export const DashboardPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="bg-gradient-to-br from-emerald-500/20 to-blue-500/20 backdrop-blur-lg border border-emerald-400/30 rounded-2xl p-6 shadow-xl"
+          className="bg-linear-to-br from-emerald-500/20 to-blue-500/20 backdrop-blur-lg border border-emerald-400/30 rounded-2xl p-6 shadow-xl"
         >
           <div className="flex items-center space-x-3 mb-4">
             <CheckCircle className="h-6 w-6 text-emerald-400" />

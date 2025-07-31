@@ -74,7 +74,7 @@ export const OnboardingPage: React.FC = () => {
   const currentStepData = steps[currentStep];
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-linear-to-br from-slate-900 via-blue-900 to-indigo-900">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export const OnboardingPage: React.FC = () => {
             </div>
             <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full shadow-lg"
+                className="h-full bg-linear-to-r from-emerald-400 to-blue-500 rounded-full shadow-lg"
                 initial={{ width: 0 }}
                 animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
@@ -131,7 +131,7 @@ export const OnboardingPage: React.FC = () => {
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${currentStepData.color} shadow-2xl mb-6`}
+                  className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br ${currentStepData.color} shadow-2xl mb-6`}
                 >
                   <currentStepData.icon className="h-10 w-10 text-white" />
                 </motion.div>
@@ -180,7 +180,7 @@ export const OnboardingPage: React.FC = () => {
                   onClick={nextStep}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-3 shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300"
+                  className="bg-linear-to-r from-emerald-500 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-3 shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300"
                 >
                   <Heart className="h-5 w-5" />
                   <span>{currentStepData.action}</span>
