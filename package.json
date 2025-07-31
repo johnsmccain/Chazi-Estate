@@ -10,17 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "algosdk": "^2.7.0",
+    "axios": "^1.6.0",
+    "date-fns": "^2.30.0",
+    "framer-motion": "^10.16.0",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0",
-    "axios": "^1.6.0",
-    "framer-motion": "^10.16.0",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.47.0",
-    "date-fns": "^2.30.0",
-    "algosdk": "^2.7.0",
-    "@supabase/supabase-js": "^2.39.0"
+    "react-router-dom": "^6.26.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
@@ -33,6 +33,7 @@
     "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
     "postcss": "^8.4.35",
+    "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.3.0",

@@ -66,7 +66,7 @@ export const Sidebar = ({sidebarOpen, setSidebarOpen}: any) => {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-scroll">
+        <nav className="flex-1 p-4 space-y-2 ">
           {navItems.map((item, index) => (
             <motion.div
               key={item.path}
