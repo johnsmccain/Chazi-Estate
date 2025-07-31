@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
-import { Building2, Shield, Zap, Heart, Sparkles } from 'lucide-react';
+import { Building2, Shield, Zap } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const { login, isAuthenticated } = useAuth();
@@ -29,38 +29,29 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="max-w-md w-full"
       >
-        <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl">
-          <div className="text-center mb-6 sm:mb-8">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5 }}
-              className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-2xl"
-            >
-              <Building2 className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-            </motion.div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 flex items-center justify-center space-x-2">
-              <span>Welcome to DeedAI</span>
-              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" />
+        <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl">
+          <div className="text-center mb-8">
+            <Building2 className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+            <h1 className="text-3xl font-bold text-white mb-2">
+              Welcome to DeedAI
             </h1>
-            <p className="text-gray-300 text-sm sm:text-base">
+            <p className="text-gray-300">
               Sign in to access your secure property management platform
             </p>
           </div>
 
-          <motion.button
+          <button
             onClick={handleGoogleLogin}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-white text-gray-900 py-3 sm:py-4 px-4 rounded-xl font-semibold flex items-center justify-center space-x-3 hover:bg-gray-100 transition-colors duration-300 mb-6 shadow-lg"
+            className="w-full bg-white text-gray-900 py-3 px-4 rounded-xl font-semibold flex items-center justify-center space-x-3 hover:bg-gray-100 transition-colors duration-300 mb-6"
           >
-            <svg className="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24">
+            <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
                 fill="#4285f4"
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -78,38 +69,22 @@ export const LoginPage: React.FC = () => {
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            <span className="text-sm sm:text-base">Continue with Google</span>
-          </motion.button>
+            <span>Continue with Google</span>
+          </button>
 
-          <div className="space-y-3 sm:space-y-4 text-sm text-gray-300">
-            <motion.div 
-              whileHover={{ x: 5 }}
-              className="flex items-center space-x-2 group"
-            >
-              <Shield className="h-4 w-4 text-green-400 group-hover:scale-110 transition-transform" />
+          <div className="space-y-4 text-sm text-gray-300">
+            <div className="flex items-center space-x-2">
+              <Shield className="h-4 w-4 text-green-400" />
               <span>End-to-end encryption</span>
-            </motion.div>
-            <motion.div 
-              whileHover={{ x: 5 }}
-              className="flex items-center space-x-2 group"
-            >
-              <Zap className="h-4 w-4 text-blue-400 group-hover:scale-110 transition-transform" />
+            </div>
+            <div className="flex items-center space-x-2">
+              <Zap className="h-4 w-4 text-blue-400" />
               <span>AI-powered assistance</span>
-            </motion.div>
-            <motion.div 
-              whileHover={{ x: 5 }}
-              className="flex items-center space-x-2 group"
-            >
-              <Building2 className="h-4 w-4 text-purple-400 group-hover:scale-110 transition-transform" />
+            </div>
+            <div className="flex items-center space-x-2">
+              <Building2 className="h-4 w-4 text-purple-400" />
               <span>Blockchain-secured deeds</span>
-            </motion.div>
-          </div>
-
-          <div className="mt-6 sm:mt-8 text-center">
-            <p className="text-xs sm:text-sm text-gray-400 flex items-center justify-center space-x-1">
-              <span>Powered by love and AI</span>
-              <Heart className="h-3 w-3 text-pink-400" />
-            </p>
+            </div>
           </div>
         </div>
       </motion.div>

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Brain, 
   TrendingUp, 
-  TrendingDown, 
   AlertCircle, 
   Lightbulb,
   Target,
@@ -11,12 +10,8 @@ import {
   Heart,
   Sparkles,
   BarChart3,
-  PieChart,
   DollarSign,
   Calendar,
-  MapPin,
-  Users,
-  Shield,
   Clock,
   Star
 } from 'lucide-react';

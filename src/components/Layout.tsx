@@ -1,120 +1,112 @@
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, Heart } from 'lucide-react';
+import { 
+  Menu,
+  Bell,
+  Heart,
+} from 'lucide-react';
+import { Sidebar } from './Sidebar';
+import { navItems } from './navData';
 
-// Import new components
-import { Header } from './layout/Header';
-import { SidebarHeader } from './layout/SidebarHeader';
-import { UserProfile } from './layout/UserProfile';
-import { Sidebar } from './layout/Sidebar';
-import { SidebarFooter } from './layout/SidebarFooter';
+
+
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { user } = useAuth();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  // Close sidebar when route changes on mobile
-  useEffect(() => {
-    setSidebarOpen(false);
-  }, [location.pathname]);
-
-  // Close sidebar when clicking outside on mobile
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setSidebarOpen(false);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const navItems = [
-    { 
-      path: '/dashboard', 
-      label: 'Home',
-      description: 'Your dashboard overview'
-    },
-    { 
-      path: '/browse', 
-      label: 'Browse Properties',
-      description: 'Discover amazing properties'
-    },
-    { 
-      path: '/my-properties', 
-      label: 'My Properties',
-      description: 'Manage your portfolio'
-    },
-    { 
-      path: '/buy-fraction', 
-      label: 'Buy Fraction',
-      description: 'Fractional ownership'
-    },
-    { 
-      path: '/rent', 
-      label: 'Rent Property',
-      description: 'Find rental opportunities'
-    },
-    { 
-      path: '/loan', 
-      label: 'Loan Property',
-      description: 'Property financing'
-    },
-    { 
-      path: '/dao', 
-      label: 'DAO Governance',
-      description: 'Property voting & decisions'
-    },
-    { 
-      path: '/deed-generator', 
-      label: 'Deed Generator',
-      description: 'AI-powered deed creation'
-    },
-    { 
-      path: '/create-deed', 
-      label: 'Create Deed',
-      description: 'Generate new deeds'
-    },
-  ];
-
-  const currentPage = navItems.find(item => item.path === location.pathname);
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex ">
       {/* Sidebar */}
       <motion.div
-        initial={false}
-        animate={{ 
-          x: sidebarOpen ? 0 : -320,
-          transition: { type: "spring", stiffness: 300, damping: 30 }
-        }}
-        className={`fixed inset-y-0 left-0 z-50 w-80 max-w-[90vw] bg-gradient-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
-      >
-        <SidebarHeader 
-          onClose={() => setSidebarOpen(false)}
-          showCloseButton={true}
-        />
-        <UserProfile />
-        <Sidebar onItemClick={() => setSidebarOpen(false)} />
-        <SidebarFooter onItemClick={() => setSidebarOpen(false)} />
+              initial={false}
+              animate={{ 
+                x: sidebarOpen ? 0 : 0,
+                transition: { type: "spring", stiffness: 300, damping: 30 }
+              }}
+              className={`fixed max-lg:hidden top-0 inset-y-0 left-0 z-50 h-screen bg-gradient-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
+            >
+      <Sidebar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen}/>
+      </motion.div>
+
+            <motion.div
+              initial={false}
+              animate={{ 
+                x: sidebarOpen ? 0 : -500,
+                transition: { type: "spring", stiffness: 300, damping: 30 }
+              }}
+              className={`fixed lg:hidden top-0 inset-y-0 left-0 z-50 h-screen  bg-gradient-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
+            >
+      <Sidebar/>
       </motion.div>
 
       {/* Main Content */}
-      <div className="flex-1 lg:ml-80">
-        <Header
-          title={currentPage?.label || 'Dashboard'}
-          description={currentPage?.description || 'Welcome back!'}
-          onMenuClick={() => setSidebarOpen(true)}
-        />
+      <div className="flex-1">
+        {/* Top Header */}
+        <header className="bg-white/5 backdrop-blur-lg border-b border-white/10 sticky top-0 z-40">
+          <div className="px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className="lg:hidden p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <Menu className="h-5 w-5" />
+                </button>
+                <div>
+                  <h1 className="text-2xl font-bold text-white">
+                    {navItems.find(item => item.path === location.pathname)?.label || 'Dashboard'}
+                  </h1>
+                  <p className="text-gray-300 text-sm">
+                    {navItems.find(item => item.path === location.pathname)?.description || 'Welcome back!'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-4">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative p-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300"
+                >
+                  <Bell className="h-5 w-5" />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute top-2 right-2 w-2 h-2 bg-emerald-400 rounded-full"
+                  />
+                </motion.button>
+                
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center space-x-3 bg-white/5 rounded-xl p-2 border border-white/10"
+                >
+                  <img
+                    src={user?.picture || '/api/placeholder/32/32'}
+                    alt={user?.name}
+                    className="h-8 w-8 rounded-lg object-cover"
+                  />
+                  <div className="hidden sm:block">
+                    <p className="text-white text-sm font-medium">{user?.name?.split(' ')[0]}</p>
+                    <div className="flex items-center space-x-1">
+                      <Heart className="h-3 w-3 text-pink-400" />
+                      <span className="text-emerald-300 text-xs">Online</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </header>
 
         {/* Page Content */}
-        <main className="p-4 lg:p-6">
+        <main className="p-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -132,28 +124,15 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSidebarOpen(false)}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           />
         )}
       </AnimatePresence>
 
-      {/* Built with Bolt.new Badge */}
-      <div className="fixed bottom-4 right-4 z-30">
-        <motion.a
-          href="https://bolt.new"
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex items-center space-x-1 lg:space-x-2 bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-2 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-medium shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300"
-        >
-          <Zap className="h-3 w-3 lg:h-4 lg:w-4 flex-shrink-0" />
-          <span className="hidden sm:inline">Built with Bolt.new</span>
-          <span className="sm:hidden">Bolt.new</span>
-          <Heart className="h-2 w-2 lg:h-3 lg:w-3 flex-shrink-0" />
-        </motion.a>
-      </div>
     </div>
   );
 };
+
+
+

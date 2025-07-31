@@ -1,17 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PropertyCard } from '../components/PropertyCard';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { AIPropertyAnalyzer } from '../components/AIPropertyAnalyzer';
 import { AIInsightPanel } from '../components/AIInsightPanel';
-import { SearchFilters } from '../components/browse/SearchFilters';
-import { PropertyGrid } from '../components/browse/PropertyGrid';
-import { Pagination } from '../components/browse/Pagination';
 import { useAuth } from '../contexts/AuthContext';
 import { 
-  Brain,
+  Search, 
+  Filter, 
+  SortDesc, 
+  MapPin, 
+  DollarSign,
+  Home,
+  Building,
+  Warehouse,
+  TreePine,
   Heart,
   Sparkles,
-  Target
+  TrendingUp,
+  Eye,
+  PieChart,
+  Key,
+  CreditCard,
+  Users,
+  Star,
+  Calendar,
+  Percent,
+  RefreshCw,
+  Grid,
+  List,
+  Brain,
+  Target,
+  Zap
 } from 'lucide-react';
 
 // Mock property data as fallback
@@ -144,6 +164,16 @@ const mockProperties = [
   }
 ];
 
+// Helper function to format currency
+const formatCurrency = (cents: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(cents / 100);
+};
+
 export const BrowsePropertiesPage: React.FC = () => {
   const { user } = useAuth();
   const [properties, setProperties] = useState<any[]>([]);
@@ -172,6 +202,11 @@ export const BrowsePropertiesPage: React.FC = () => {
       setIsLoading(true);
       setError(null);
       
+      // For now, use mock data since Supabase might not be properly configured
+      // In production, this would be:
+      // const { propertyService } = await import('../lib/supabase');
+      // const data = await propertyService.getProperties({ limit: 100 });
+      
       // Simulate loading delay
       await new Promise(resolve => setTimeout(resolve, 1000));
       
@@ -189,6 +224,7 @@ export const BrowsePropertiesPage: React.FC = () => {
     } catch (err) {
       console.error('Error loading properties:', err);
       setError('Failed to load properties. Using demo data instead.');
+      // Still show mock data even if there's an error
       setProperties(mockProperties);
     } finally {
       setIsLoading(false);
@@ -257,7 +293,7 @@ export const BrowsePropertiesPage: React.FC = () => {
     if (priceRange !== 'all') {
       switch (priceRange) {
         case 'under-1m':
-          filtered = filtered.filter(property => property.price < 100000000);
+          filtered = filtered.filter(property => property.price < 100000000); // $1M in cents
           break;
         case '1m-3m':
           filtered = filtered.filter(property => 
@@ -278,6 +314,7 @@ export const BrowsePropertiesPage: React.FC = () => {
     // Sorting with AI recommendations
     switch (sortBy) {
       case 'ai-recommended':
+        // AI-based sorting considering user preferences, market trends, and property potential
         filtered.sort((a, b) => {
           const aScore = calculateAIScore(a);
           const bScore = calculateAIScore(b);
@@ -312,7 +349,7 @@ export const BrowsePropertiesPage: React.FC = () => {
     }
 
     setFilteredProperties(filtered);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to first page when filters change
   }, [properties, searchTerm, filterType, filterStatus, filterOwnership, filterAvailability, priceRange, sortBy, userShares]);
 
   // AI scoring algorithm for property recommendations
@@ -356,7 +393,26 @@ export const BrowsePropertiesPage: React.FC = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedProperties = filteredProperties.slice(startIndex, startIndex + itemsPerPage);
 
+  const getTypeIcon = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'residential': return Home;
+      case 'commercial': return Building;
+      case 'industrial': return Warehouse;
+      case 'land': return TreePine;
+      default: return Home;
+    }
+  };
+
+  const propertyTypes = [
+    { value: 'all', label: 'All Types', icon: Home },
+    { value: 'residential', label: 'Residential', icon: Home },
+    { value: 'commercial', label: 'Commercial', icon: Building },
+    { value: 'industrial', label: 'Industrial', icon: Warehouse },
+    { value: 'land', label: 'Land', icon: TreePine }
+  ];
+
   const handlePropertyClick = async (property: any) => {
+    // Increment views when property is clicked
     setProperties(prev => 
       prev.map(p => p.id === property.id ? { ...p, views: p.views + 1 } : p)
     );
@@ -382,6 +438,7 @@ export const BrowsePropertiesPage: React.FC = () => {
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center space-x-2 mx-auto"
           >
+            <RefreshCw className="h-5 w-5" />
             <span>Try Again</span>
           </motion.button>
         </div>
@@ -427,28 +484,178 @@ export const BrowsePropertiesPage: React.FC = () => {
       )}
 
       {/* Search and Filters */}
-      <SearchFilters
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        filterType={filterType}
-        onFilterTypeChange={setFilterType}
-        filterOwnership={filterOwnership}
-        onFilterOwnershipChange={setFilterOwnership}
-        priceRange={priceRange}
-        onPriceRangeChange={setPriceRange}
-        filterAvailability={filterAvailability}
-        onFilterAvailabilityChange={setFilterAvailability}
-        sortBy={sortBy}
-        onSortByChange={setSortBy}
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
-        showAIInsights={showAIInsights}
-        onToggleAIInsights={() => setShowAIInsights(!showAIInsights)}
-        onRefresh={loadProperties}
-        resultsCount={filteredProperties.length}
-        userPropertiesCount={Object.keys(userShares).length}
-        user={user}
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 mb-6">
+          {/* Search */}
+          <div className="lg:col-span-2 relative">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-emerald-400" />
+            <input
+              type="text"
+              placeholder="AI-powered search... 🧠"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+            />
+          </div>
+
+          {/* Property Type Filter */}
+          <div className="relative">
+            <Filter className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400" />
+            <select
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value)}
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
+            >
+              {propertyTypes.map(type => (
+                <option key={type.value} value={type.value}>{type.label}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Ownership Type Filter */}
+          <div className="relative">
+            <Users className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-400" />
+            <select
+              value={filterOwnership}
+              onChange={(e) => setFilterOwnership(e.target.value)}
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 appearance-none transition-all"
+            >
+              <option value="all">All Ownership 👥</option>
+              <option value="full">Full Ownership 🏠</option>
+              <option value="fractional">Fractional 🥧</option>
+              <option value="shared">Shared 🤝</option>
+            </select>
+          </div>
+
+          {/* Price Range Filter */}
+          <div className="relative">
+            <DollarSign className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-emerald-400" />
+            <select
+              value={priceRange}
+              onChange={(e) => setPriceRange(e.target.value)}
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 appearance-none transition-all"
+            >
+              <option value="all">All Prices 💰</option>
+              <option value="under-1m">Under $1M</option>
+              <option value="1m-3m">$1M - $3M</option>
+              <option value="3m-5m">$3M - $5M</option>
+              <option value="over-5m">Over $5M</option>
+            </select>
+          </div>
+
+          {/* Availability Filter */}
+          <div className="relative">
+            <TrendingUp className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-amber-400" />
+            <select
+              value={filterAvailability}
+              onChange={(e) => setFilterAvailability(e.target.value)}
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 appearance-none transition-all"
+            >
+              <option value="all">All Available ✨</option>
+              <option value="fraction">Fractions 🥧</option>
+              <option value="rent">Rentals 🏠</option>
+              <option value="loan">Loans 💳</option>
+              {user && <option value="my-properties">My Properties 👤</option>}
+            </select>
+          </div>
+
+          {/* Sort */}
+          <div className="relative">
+            <Brain className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-pink-400" />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 appearance-none transition-all"
+            >
+              <option value="ai-recommended">🧠 AI Recommended</option>
+              <option value="newest">Newest First 🆕</option>
+              <option value="oldest">Oldest First 📅</option>
+              <option value="price-high">Highest Price 💰</option>
+              <option value="price-low">Lowest Price 💵</option>
+              <option value="rating">Highest Rated ⭐</option>
+              <option value="views">Most Viewed 👁️</option>
+              <option value="availability">Most Available 📈</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Quick Filters */}
+        <div className="flex flex-wrap gap-3 mb-6">
+          {propertyTypes.slice(1).map((type) => {
+            const IconComponent = type.icon;
+            return (
+              <motion.button
+                key={type.value}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setFilterType(filterType === type.value ? 'all' : type.value)}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 ${
+                  filterType === type.value
+                    ? 'bg-gradient-to-r from-emerald-500 to-blue-600 text-white shadow-lg'
+                    : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white'
+                }`}
+              >
+                <IconComponent className="h-4 w-4" />
+                <span className="text-sm font-medium">{type.label}</span>
+              </motion.button>
+            );
+          })}
+        </div>
+
+        <div className="flex items-center justify-between">
+          <p className="text-gray-300 flex items-center space-x-2">
+            <Target className="h-4 w-4 text-purple-400" />
+            <span>{filteredProperties.length} AI-curated properties found</span>
+            {user && Object.keys(userShares).length > 0 && (
+              <>
+                <span className="text-gray-500">•</span>
+                <span className="text-purple-400">You own {Object.keys(userShares).length} properties</span>
+              </>
+            )}
+          </p>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => setShowAIInsights(!showAIInsights)}
+              className={`p-2 rounded-lg transition-colors ${
+                showAIInsights ? 'bg-purple-500 text-white' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              <Brain className="h-4 w-4" />
+            </button>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-2 rounded-lg transition-colors ${
+                  viewMode === 'grid' ? 'bg-emerald-500 text-white' : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                <Grid className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setViewMode('list')}
+                className={`p-2 rounded-lg transition-colors ${
+                  viewMode === 'list' ? 'bg-emerald-500 text-white' : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                <List className="h-4 w-4" />
+              </button>
+            </div>
+            <motion.button
+              onClick={loadProperties}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-2 rounded-lg bg-white/10 text-gray-300 hover:text-white hover:bg-white/20 transition-colors"
+            >
+              <RefreshCw className="h-4 w-4" />
+            </motion.button>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Properties Grid/List */}
       {isLoading ? (
@@ -457,21 +664,108 @@ export const BrowsePropertiesPage: React.FC = () => {
         </div>
       ) : (
         <>
-          <PropertyGrid
-            properties={paginatedProperties}
-            viewMode={viewMode}
-            sortBy={sortBy}
-            userShares={userShares}
-            onPropertyClick={handlePropertyClick}
-            onAnalyzeProperty={setSelectedPropertyForAnalysis}
-          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className={`grid gap-8 ${
+              viewMode === 'grid' 
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+                : 'grid-cols-1'
+            }`}
+          >
+            <AnimatePresence>
+              {paginatedProperties.map((property, index) => (
+                <motion.div
+                  key={property.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative group"
+                >
+                  <PropertyCard
+                    property={property}
+                    onClick={() => handlePropertyClick(property)}
+                    showOwner={true}
+                    variant={viewMode === 'list' ? 'detailed' : 'default'}
+                    userShares={userShares[property.id] || 0}
+                  />
+                  
+                  {/* AI Score Badge */}
+                  {sortBy === 'ai-recommended' && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10"
+                    >
+                      <div className="flex items-center space-x-1">
+                        <Brain className="h-3 w-3" />
+                        <span>AI Pick</span>
+                      </div>
+                    </motion.div>
+                  )}
+                  
+                  {/* Quick Analysis Button */}
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPropertyForAnalysis(property);
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-blue-600 text-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
+                  >
+                    <Zap className="h-4 w-4" />
+                  </motion.button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Pagination */}
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
+          {totalPages > 1 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex justify-center items-center space-x-4 mt-8"
+            >
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 bg-white/10 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-colors"
+              >
+                Previous
+              </button>
+              
+              <div className="flex space-x-2">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  const page = i + 1;
+                  return (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`px-3 py-2 rounded-lg transition-colors ${
+                        currentPage === page
+                          ? 'bg-emerald-500 text-white'
+                          : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  );
+                })}
+              </div>
+              
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 bg-white/10 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-colors"
+              >
+                Next
+              </button>
+            </motion.div>
+          )}
         </>
       )}
 
