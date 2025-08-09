@@ -17,3 +17,26 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 }
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #5759d4;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(30, 15, 112);
+    border-radius: 100vh;
+    border: 0px solid #818845;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #12024b;
+  }
+}
+   

@@ -20,7 +20,7 @@ export const Sidebar = ({sidebarOpen, setSidebarOpen}: any) => {
   return (
           <>
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/10 bg-black">
+        <div className="flex items-center justify-between p-6 border-b border-white/10">
           <Link to="/dashboard" className="flex items-center space-x-3">
             <motion.div
               whileHover={{ rotate: 360 }}
@@ -66,7 +66,7 @@ export const Sidebar = ({sidebarOpen, setSidebarOpen}: any) => {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-scroll">
+        <nav className="flex-1 p-4 space-y-2 ">
           {navItems.map((item, index) => (
             <motion.div
               key={item.path}

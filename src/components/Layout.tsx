@@ -30,7 +30,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 x: sidebarOpen ? 0 : 0,
                 transition: { type: "spring", stiffness: 300, damping: 30 }
               }}
-              className={`fixed max-lg:hidden top-0 inset-y-0 left-0 z-50 h-screen overflow-y-scroll bg-linear-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
+              className={`fixed max-lg:hidden top-0 inset-y-0 left-0 z-50 h-screen scrollbar-w-thin scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300  overflow-y-scroll bg-linear-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
             >
       <Sidebar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen}/>
       </motion.div>
@@ -41,13 +41,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 x: sidebarOpen ? 0 : -500,
                 transition: { type: "spring", stiffness: 300, damping: 30 }
               }}
-              className={`fixed lg:hidden top-0 inset-y-0 left-0 z-50 h-screen overflow-y-scroll bg-linear-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
+              className={`fixed lg:hidden top-0 inset-y-0 left-0 z-50 h-screen overflow-y-scroll  bg-linescrollbar-w-8 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-scrollar-to-b from-slate-800/98 to-slate-900/98 backdrop-blur-xl border-r border-white/10 lg:translate-x-0 lg:static lg:inset-0`}
             >
       <Sidebar/>
       </motion.div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-scroll">
+      <div className="flex-1 h-screen overflow-y-scroll  bg-linescrollbar-w-8 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-scrollar-to-b">
         {/* Top Header */}
         <header className="bg-white/5 backdrop-blur-lg border-b border-white/10 sticky top-0 z-40">
           <div className="px-6 py-4">
