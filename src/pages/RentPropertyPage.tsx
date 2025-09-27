@@ -44,7 +44,7 @@ interface RentalProperty {
   utilities: string[];
 }
 
-export const RentPropertyPage: React.FC = () => {
+const RentPropertyPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [priceRange, setPriceRange] = useState('all');
@@ -615,3 +615,5 @@ export const RentPropertyPage: React.FC = () => {
     </div>
   );
 };
+
+export default RentPropertyPage;

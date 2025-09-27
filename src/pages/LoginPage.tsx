@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { Building2, Shield, Zap } from 'lucide-react';
 
-export const LoginPage: React.FC = () => {
+const LoginPage: React.FC = () => {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ export const LoginPage: React.FC = () => {
           <div className="text-center mb-8">
             <Building2 className="h-12 w-12 text-blue-400 mx-auto mb-4" />
             <h1 className="text-3xl font-bold text-white mb-2">
-              Welcome to DeedAI
+              Welcome to chazi-chain
             </h1>
             <p className="text-gray-300">
               Sign in to access your secure property management platform
@@ -91,3 +91,5 @@ export const LoginPage: React.FC = () => {
     </div>
   );
 };
+
+export default LoginPage;

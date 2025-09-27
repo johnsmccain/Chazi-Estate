@@ -25,7 +25,7 @@ interface PropertyFormData {
   description: string;
 }
 
-export const PropertyUploadPage: React.FC = () => {
+const PropertyUploadPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
@@ -448,3 +448,4 @@ export const PropertyUploadPage: React.FC = () => {
     </div>
   );
 };
+export default PropertyUploadPage;

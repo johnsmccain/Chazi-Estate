@@ -36,7 +36,7 @@ interface PropertyFormData {
   ownerPhone: string;
 }
 
-export const CreateDeedPage: React.FC = () => {
+const CreateDeedPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
@@ -96,11 +96,34 @@ export const CreateDeedPage: React.FC = () => {
   const onSubmit = async (data: PropertyFormData) => {
     setIsSubmitting(true);
     
-    // Simulate processing time
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    console.log('Property data:', data);
-    navigate('/deed/new-property');
+    try {
+      // TODO: Integrate with useHedera hook to create property
+      // const hedera = useHedera();
+      // const result = await hedera.createProperty({
+      //   name: `${data.address}, ${data.city}`,
+      //   symbol: 'PROP',
+      //   totalValue: data.estimatedValue.toString(),
+      //   totalShares: '10000',
+      //   pricePerShare: (data.estimatedValue / 10000).toString(),
+      //   allowsFractionalOwnership: true,
+      //   rentPrice: (data.estimatedValue * 0.01).toString(), // 1% of value
+      //   loanToValue: '7000', // 70%
+      //   interestRate: '500', // 5%
+      //   expectedReturn: '800', // 8%
+      //   minInvestment: '100000000000000000000', // 100 ETH
+      //   metadataURI: 'ipfs://mock-metadata'
+      // });
+      
+      // Simulate processing time
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      console.log('Property data:', data);
+      navigate('/deed/new-property');
+    } catch (error) {
+      console.error('Failed to create property:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const nextStep = () => {
@@ -702,3 +725,5 @@ export const CreateDeedPage: React.FC = () => {
     </div>
   );
 };
+
+export default CreateDeedPage;

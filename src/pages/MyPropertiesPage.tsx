@@ -37,7 +37,7 @@ interface Property {
   appreciation?: string;
 }
 
-export const MyPropertiesPage: React.FC = () => {
+const MyPropertiesPage: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
 
@@ -407,3 +407,5 @@ export const MyPropertiesPage: React.FC = () => {
     </div>
   );
 };
+
+export default MyPropertiesPage;

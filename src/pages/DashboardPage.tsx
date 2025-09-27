@@ -26,7 +26,7 @@ import {
   DollarSign
 } from 'lucide-react';
 
-export const DashboardPage: React.FC = () => {
+const DashboardPage: React.FC = () => {
   const { user } = useAuth();
   const { isConnected, account, balance, properties, connectWallet, isLoading } = useAlgorand();
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
@@ -170,7 +170,7 @@ export const DashboardPage: React.FC = () => {
                 <AIVoiceAgent
                   message={aiWelcomeMessage}
                   isActive={true}
-                  agentName="Your Personal DeedAI Assistant"
+                  agentName="Your Personal chazi-chain Assistant"
                   personality="caring"
                   capabilities={['Market Analysis', 'Portfolio Optimization', 'Risk Assessment']}
                   showVisualizer={true}
@@ -444,3 +444,5 @@ export const DashboardPage: React.FC = () => {
     </div>
   );
 };
+
+export default DashboardPage;

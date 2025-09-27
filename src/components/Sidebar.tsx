@@ -30,7 +30,7 @@ export const Sidebar = ({sidebarOpen, setSidebarOpen}: any) => {
               <Building2 className="h-6 w-6 text-white" />
             </motion.div>
             <div>
-              <span className="text-xl font-bold text-white">DeedAI</span>
+              <span className="text-xl font-bold text-white">chazi-chain</span>
               <div className="flex items-center space-x-1">
                 <Sparkles className="h-3 w-3 text-amber-400" />
                 <span className="text-xs text-emerald-300 font-medium">Pro</span>

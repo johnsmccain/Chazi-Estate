@@ -14,7 +14,7 @@ import {
   Sparkles
 } from 'lucide-react';
 
-export const OnboardingPage: React.FC = () => {
+const OnboardingPage: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
@@ -24,7 +24,7 @@ export const OnboardingPage: React.FC = () => {
   const steps = [
     {
       title: `Welcome to your real estate future, ${user?.name?.split(' ')[0]}! 🏡`,
-      content: `Hi there! I'm your personal DeedAI assistant, and I'm absolutely thrilled to meet you. Think of me as your friendly guide who's here to make property ownership as smooth as silk. I've helped thousands of people secure their real estate dreams, and I can't wait to help you too. Let's embark on this exciting journey together!`,
+      content: `Hi there! I'm your personal chazi-chain assistant, and I'm absolutely thrilled to meet you. Think of me as your friendly guide who's here to make property ownership as smooth as silk. I've helped thousands of people secure their real estate dreams, and I can't wait to help you too. Let's embark on this exciting journey together!`,
       icon: User,
       color: 'from-emerald-400 to-blue-500',
       action: 'Let\'s begin this adventure!'
@@ -90,7 +90,7 @@ export const OnboardingPage: React.FC = () => {
             className="flex items-center justify-center space-x-3 mb-4"
           >
             <Building2 className="h-10 w-10 text-emerald-400" />
-            <span className="text-2xl font-bold text-white">DeedAI Onboarding</span>
+            <span className="text-2xl font-bold text-white">chazi-chain Onboarding</span>
             <Sparkles className="h-6 w-6 text-amber-400" />
           </motion.div>
           
@@ -150,7 +150,7 @@ export const OnboardingPage: React.FC = () => {
                   <AIVoiceAgent
                     message={currentStepData.content}
                     isActive={true}
-                    agentName="Your Personal DeedAI Assistant"
+                    agentName="Your Personal chazi-chain Assistant"
                     showVisualizer={true}
                   />
                 </motion.div>
@@ -217,3 +217,5 @@ export const OnboardingPage: React.FC = () => {
     </div>
   );
 };
+
+export default OnboardingPage;

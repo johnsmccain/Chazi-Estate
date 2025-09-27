@@ -19,7 +19,7 @@ import {
   Zap
 } from 'lucide-react';
 
-export const DeedGenerationPage: React.FC = () => {
+const DeedGenerationPage: React.FC = () => {
   const { propertyId } = useParams();
   const navigate = useNavigate();
   const { mintPropertyNFT, verifyDeed, isLoading } = useAlgorand();
@@ -476,3 +476,5 @@ export const DeedGenerationPage: React.FC = () => {
     </div>
   );
 };
+
+export default DeedGenerationPage;

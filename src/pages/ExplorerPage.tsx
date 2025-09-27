@@ -41,7 +41,7 @@ interface Property {
   bathrooms?: number;
 }
 
-export const ExplorerPage: React.FC = () => {
+const ExplorerPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
@@ -168,7 +168,7 @@ export const ExplorerPage: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center space-x-3">
               <Building2 className="h-8 w-8 text-emerald-400" />
-              <span className="text-xl font-bold text-white">DeedAI</span>
+              <span className="text-xl font-bold text-white">chazi-chain</span>
               <Sparkles className="h-5 w-5 text-amber-400" />
             </Link>
 
@@ -238,7 +238,7 @@ export const ExplorerPage: React.FC = () => {
                   placeholder="Search with love... 💚"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
+                  className="w-full bg-white/30 border border-white/20 rounded-xl pl-12 pr-4 py-4  placeholder-gray-400 focus:outline-hidden focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                 />
               </div>
 
@@ -248,8 +248,8 @@ export const ExplorerPage: React.FC = () => {
                 <select
                   value={filterType}
                   onChange={(e) => setFilterType(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
-                >
+                  className="w-full  border bg-white/30 border-white/20 rounded-xl pl-12 pr-4 py-4  focus:outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 appearance-none transition-all"
+                > 
                   <option value="all">All Types 🏠</option>
                   <option value="residential">Residential 🏡</option>
                   <option value="commercial">Commercial 🏢</option>
@@ -263,7 +263,7 @@ export const ExplorerPage: React.FC = () => {
                 <select
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 appearance-none transition-all"
+                  className="w-full bg-white/30 border border-white/20 rounded-xl pl-12 pr-4 py-4  focus:outline-hidden focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 appearance-none transition-all"
                 >
                   <option value="all">All Status ✨</option>
                   <option value="verified">Verified ✅</option>
@@ -278,7 +278,7 @@ export const ExplorerPage: React.FC = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-hidden focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 appearance-none transition-all"
+                  className="w-full bg-white/30 border border-white/20 rounded-xl pl-12 pr-4 py-4 focus:outline-hidden focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 appearance-none transition-all"
                 >
                   <option value="newest">Newest First 🆕</option>
                   <option value="oldest">Oldest First 📅</option>
@@ -534,3 +534,5 @@ export const ExplorerPage: React.FC = () => {
     </div>
   );
 };
+
+export default ExplorerPage;

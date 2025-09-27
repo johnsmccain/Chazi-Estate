@@ -41,7 +41,7 @@ interface DeedFormData {
   specialConditions: string;
 }
 
-export const DeedGeneratorPage: React.FC = () => {
+const DeedGeneratorPage: React.FC = () => {
   const { user } = useAuth();
   const [formData, setFormData] = useState<DeedFormData>({
     propertyAddress: '',
@@ -577,7 +577,7 @@ export const DeedGeneratorPage: React.FC = () => {
             <AIVoiceAgent
               message="I'm analyzing your property information and generating a comprehensive legal deed. This process includes validating all details, ensuring legal compliance, and creating a blockchain-ready document that will protect your ownership rights forever."
               isActive={true}
-              agentName="DeedAI Legal Assistant"
+              agentName="chazi-chain Legal Assistant"
               showVisualizer={true}
             />
           )}
@@ -723,3 +723,5 @@ export const DeedGeneratorPage: React.FC = () => {
     </div>
   );
 };
+
+export default DeedGeneratorPage;

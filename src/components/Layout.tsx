@@ -8,6 +8,7 @@ import {
   Heart,
 } from 'lucide-react';
 import { Sidebar } from './Sidebar';
+import { RainbowKitWalletConnection } from './RainbowKitWalletConnection';
 import { navItems } from './navData';
 
 
@@ -70,6 +71,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               </div>
 
               <div className="flex items-center space-x-4">
+                {/* Wallet Connection */}
+                <RainbowKitWalletConnection variant="compact" />
+                
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

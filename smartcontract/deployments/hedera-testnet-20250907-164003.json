@@ -1,0 +1,21 @@
+{
+  "network": "hedera-testnet",
+  "chainId": 296,
+  "rpcUrl": "https://testnet.hashio.io/api",
+  "deployedAt": "2025-09-07T15:40:03Z",
+  "deployer": "0xEed514DCbB5A1C4f01e96E2F3ad6c749ec2Ba03b",
+  "contracts": {
+    "PropertyFactory": "0x670782a6158782157bd0DD251152c075f767689D",
+    "PropertyDeed": "0xDD03A05cC7A5743b5bd40CA6030A9B227d1a8D0B",
+    "PropertyToken": "",
+    "DeedDAO": "0xe05E191363F3c4c6457148479415D861d261ee2a",
+    "RevenueDistributor": "0xd63F3f7a51CbBF73447676d622CFe380bbbd4a5a",
+    "LoanManager": "0x05a1e50ceBad9baB94f9CA47f909289332E6F2D9"
+  },
+  "compiler": {
+    "version": "0.8.28",
+    "optimizer": true,
+    "runs": 200,
+    "viaIr": true
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   MapPin, 
   DollarSign, 
@@ -38,6 +39,22 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
   variant = 'default',
   userShares = 0
 }) => {
+  const navigate = useNavigate();
+
+  const handleBuyClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/buy-fraction/${property.id}`);
+  };
+
+  const handleRentClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/rent?propertyId=${property.id}`);
+  };
+
+  const handleLoanClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/loan?propertyId=${property.id}`);
+  };
   const getStatusConfig = (status: string) => {
     switch (status) {
       case 'verified':
@@ -336,6 +353,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         <div className="grid grid-cols-3 gap-2">
           {property.fraction_available && property.available_shares && property.available_shares > 0 && (
             <motion.button
+              onClick={handleBuyClick}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="bg-linear-to-r from-purple-500 to-pink-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
@@ -346,6 +364,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           )}
           {property.rent_available && (
             <motion.button
+              onClick={handleRentClick}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="bg-linear-to-r from-green-500 to-emerald-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"
@@ -356,6 +375,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           )}
           {property.loan_available && (
             <motion.button
+              onClick={handleLoanClick}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="bg-linear-to-r from-blue-500 to-indigo-600 text-white py-2 px-3 rounded-lg font-medium text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-1"

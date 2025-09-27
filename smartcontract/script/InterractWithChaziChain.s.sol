@@ -8,7 +8,7 @@ import {DeedDAO} from "../src/governace/DeedDAO.sol";
 
 
 // Script for interacting with deployed contracts (testing/demo purposes)
-contract InteractWithDeedAI is Script {
+contract InteractWithChaziChain is Script {
     function run() external {
         string memory network = vm.envString("NETWORK");
         string memory fileName = string.concat("deployments/", network, ".json");
@@ -17,7 +17,7 @@ contract InteractWithDeedAI is Script {
         address factoryAddress = vm.parseJsonAddress(json, ".PropertyFactory");
         address daoAddress = vm.parseJsonAddress(json, ".DeedDAO");
         
-        PropertyFactory factory = PropertyFactory(factoryAddress);
+        PropertyFactory factory = PropertyFactory(payable(factoryAddress));
         DeedDAO dao = DeedDAO(daoAddress);
         
         vm.startBroadcast();

@@ -18,7 +18,7 @@ export const AIVoiceAgent: React.FC<AIVoiceAgentProps> = ({
   isActive = false,
   onComplete,
   showVisualizer = true,
-  agentName = "DeedAI Assistant",
+  agentName = "chazi-chain Assistant",
   personality = 'caring',
   avatar,
   capabilities = []

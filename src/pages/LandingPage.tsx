@@ -10,7 +10,7 @@ import {
   CheckCircle
 } from 'lucide-react';
 
-export const LandingPage: React.FC = () => {
+const LandingPage: React.FC = () => {
   const features = [
     {
       icon: Shield,
@@ -80,7 +80,7 @@ export const LandingPage: React.FC = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-white mb-4">
-              Why Choose DeedAI?
+              Why Choose chazi-chain?
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Revolutionary technology meets real estate to create the most secure and efficient 
@@ -168,3 +168,5 @@ export const LandingPage: React.FC = () => {
     </div>
   );
 };
+
+export default LandingPage;

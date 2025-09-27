@@ -24,7 +24,7 @@ import {
   PieChart
 } from 'lucide-react';
 
-export const DAODashboardPage: React.FC = () => {
+const DAODashboardPage: React.FC = () => {
   const { user } = useAuth();
   const [proposals, setProposals] = useState<DAOProposal[]>([]);
   const [userVotes, setUserVotes] = useState<Record<string, any>>({});
@@ -434,3 +434,5 @@ export const DAODashboardPage: React.FC = () => {
     </div>
   );
 };
+
+export default DAODashboardPage;

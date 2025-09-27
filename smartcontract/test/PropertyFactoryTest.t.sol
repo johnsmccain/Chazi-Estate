@@ -8,6 +8,8 @@ import {PropertyDeed} from "../src/core/PropertyDeed.sol";
 import {DeedDAO} from "../src/governace/DeedDAO.sol";
 import {RevenueDistributor} from "../src/finance/RevenueDistributor.sol";
 import {LoanManager} from "../src/finance/LoanManager.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 
 contract PropertyFactoryTest is Test {
     PropertyFactory public factory;
@@ -25,9 +27,10 @@ contract PropertyFactoryTest is Test {
     uint256 public constant TOTAL_SHARES = 10000;
     uint256 public constant PRICE_PER_SHARE = 0.1 ether;
     
-    event PropertyCreated(uint256 indexed propertyId, string name, address indexed propertyToken, uint256 totalValue);
+    event PropertyCreated(uint256 indexed propertyId, string name, uint256 totalValue, uint256 totalShares);
     event SharesPurchased(uint256 indexed propertyId, address indexed buyer, uint256 shares, uint256 cost);
     event SharesSold(uint256 indexed propertyId, address indexed seller, uint256 shares, uint256 proceeds);
+    event PropertyRented(uint256 indexed propertyId, address indexed tenant, uint256 rentAmount);
     
     function setUp() public {
         vm.startPrank(owner);
@@ -56,7 +59,12 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
         
         assertEq(propertyId, 1);
@@ -78,17 +86,24 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
         
         uint256 sharesToBuy = 1000;
         uint256 cost = sharesToBuy * PRICE_PER_SHARE;
+        uint256 platformFee = (cost * 250) / 10000; // 2.5% platform fee
+        uint256 totalCost = cost + platformFee;
         
         vm.expectEmit(true, true, true, true);
         emit SharesPurchased(propertyId, user1, sharesToBuy, cost);
         
         vm.prank(user1);
-        factory.buyShares{value: cost}(propertyId, sharesToBuy);
+        factory.buyShares{value: totalCost}(propertyId, sharesToBuy);
         
         uint256 userShares = factory.getUserShares(user1, propertyId);
         assertEq(userShares, sharesToBuy);
@@ -106,7 +121,12 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
         
         uint256 sharesToBuy = 1000;
@@ -126,26 +146,35 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
         
         uint256 sharesToBuy = 1000;
         uint256 cost = sharesToBuy * PRICE_PER_SHARE;
+        uint256 platformFee = (cost * 250) / 10000; // 2.5% platform fee
+        uint256 totalCost = cost + platformFee;
         
         vm.prank(user1);
-        factory.buyShares{value: cost}(propertyId, sharesToBuy);
+        factory.buyShares{value: totalCost}(propertyId, sharesToBuy);
         
         uint256 sharesToSell = 500;
         uint256 proceeds = sharesToSell * PRICE_PER_SHARE;
+        uint256 sellPlatformFee = (proceeds * 250) / 10000; // 2.5% platform fee
+        uint256 netProceeds = proceeds - sellPlatformFee;
         uint256 balanceBefore = user1.balance;
         
         vm.expectEmit(true, true, true, true);
-        emit SharesSold(propertyId, user1, sharesToSell, proceeds);
+        emit SharesSold(propertyId, user1, sharesToSell, netProceeds);
         
         vm.prank(user1);
         factory.sellShares(propertyId, sharesToSell);
         
-        assertEq(user1.balance, balanceBefore + proceeds);
+        assertEq(user1.balance, balanceBefore + netProceeds);
         assertEq(factory.getUserShares(user1, propertyId), sharesToBuy - sharesToSell);
     }
     
@@ -158,18 +187,31 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
         
         // Buy 50% or more shares to be eligible for loan
         uint256 sharesToBuy = 5000; // 50%
         uint256 cost = sharesToBuy * PRICE_PER_SHARE;
+        uint256 platformFee = (cost * 250) / 10000; // 2.5% platform fee
+        uint256 totalCost = cost + platformFee;
         
         vm.prank(user1);
-        factory.buyShares{value: cost}(propertyId, sharesToBuy);
+        factory.buyShares{value: totalCost}(propertyId, sharesToBuy);
         
-        // Check if loan initiated event was emitted
-        // This would trigger loan eligibility in real implementation
+        // Verify user has the shares
+        uint256 userShares = factory.getUserShares(user1, propertyId);
+        assertEq(userShares, sharesToBuy);
+        
+        // Verify property is active and loan is available
+        PropertyFactory.PropertyInfo memory info = factory.getPropertyInfo(propertyId);
+        assertTrue(info.isActive);
+        assertTrue(info.loanAvailable);
     }
     
     function testRentProperty() public {
@@ -181,20 +223,30 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
         
-        uint256 rentAmount = 10 ether;
+        uint256 rentAmount = 1000 ether; // Use the correct rent price
+        
+        vm.expectEmit(true, true, true, true);
+        emit PropertyRented(propertyId, user1, rentAmount);
         
         vm.prank(user1);
         factory.rentProperty{value: rentAmount}(propertyId);
         
-        // Check that revenue was added to distributor
-        // In real implementation, you'd check distributor balance
+        // Verify property is active and rent is available
+        PropertyFactory.PropertyInfo memory info = factory.getPropertyInfo(propertyId);
+        assertTrue(info.isActive);
+        assertTrue(info.rentAvailable);
     }
     
     function testOnlyOwnerCanCreateProperty() public {
-        vm.expectRevert("Ownable: caller is not the owner");
+        vm.expectRevert(abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, user1));
         vm.prank(user1);
         factory.createProperty(
             "Test Property",
@@ -203,7 +255,12 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
     }
     
@@ -211,7 +268,7 @@ contract PropertyFactoryTest is Test {
         vm.prank(owner);
         factory.pause();
         
-        vm.expectRevert("Pausable: paused");
+        vm.expectRevert(Pausable.EnforcedPause.selector);
         vm.prank(owner);
         factory.createProperty(
             "Test Property",
@@ -220,7 +277,12 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
         
         vm.prank(owner);
@@ -235,7 +297,12 @@ contract PropertyFactoryTest is Test {
             TOTAL_SHARES,
             PRICE_PER_SHARE,
             "ipfs://test-metadata",
-            true
+            true,
+            1000 ether, // rent price
+            7000,       // loan to value (70%)
+            500,        // interest rate (5%)
+            800,        // expected return (8%)
+            100 ether   // min investment
         );
         
         assertEq(propertyId, 1);

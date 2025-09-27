@@ -19,12 +19,22 @@ contract RevenueDistributorTest is Test {
         distributor = new RevenueDistributor();
         
         vm.prank(owner);
-        token = new PropertyToken(
-            "Test Property Token",
+        token = new PropertyToken();
+        
+        vm.prank(owner);
+        token.addAuthorizedMinter(owner);
+        vm.prank(owner);
+        token.addAuthorizedOperator(owner);
+        
+        // Create a property first
+        vm.prank(owner);
+        (uint256 propertyId, uint256 tokenId) = token.createProperty(
+            "Test Property",
             "TPT",
-            PROPERTY_ID,
             10000,
-            1000 ether
+            1000 ether,
+            10000000 ether,
+            "https://example.com/metadata"
         );
         
         vm.prank(owner);
@@ -51,7 +61,7 @@ contract RevenueDistributorTest is Test {
         token.addAuthorizedMinter(owner);
         
         vm.prank(owner);
-        token.mint(user1, 1000);
+        token.mintShares(PROPERTY_ID, user1, 1000, 1000 * 1000 ether);
         
         // Add revenue
         vm.deal(address(this), revenueAmount);

@@ -1,0 +1,40 @@
+chazi-chain Smart Contracts - Verification Information
+================================================
+
+Network: Hedera Testnet (Chain ID: 296)
+RPC URL: https://testnet.hashio.io/api
+Explorer: https://hashscan.io/testnet
+Deployed At: 2025-09-07T15:40:03Z
+
+Contract Addresses:
+- PropertyFactory: 0x670782a6158782157bd0DD251152c075f767689D
+- PropertyDeed: 0xDD03A05cC7A5743b5bd40CA6030A9B227d1a8D0B
+- PropertyToken: 
+- DeedDAO: 0xe05E191363F3c4c6457148479415D861d261ee2a
+- RevenueDistributor: 0xd63F3f7a51CbBF73447676d622CFe380bbbd4a5a
+- LoanManager: 0x05a1e50ceBad9baB94f9CA47f909289332E6F2D9
+
+Compiler Settings:
+- Version: 0.8.28
+- Optimization: Enabled
+- Runs: 200
+- EVM Version: default
+- Via IR: true
+
+Verification Steps:
+1. Visit https://hashscan.io/testnet
+2. Search for each contract address
+3. Click "Verify Contract"
+4. Upload the source files in this directory
+5. Set the compiler settings above
+6. Submit for verification
+
+File Structure:
+- Main contracts: *.sol files in root
+- Interfaces: I*.sol files in root
+- OpenZeppelin: openzeppelin/ directory
+- Chainlink: chainlink/ directory
+
+Dependencies:
+- @openzeppelin/contracts (from openzeppelin/ directory)
+- @chainlink/contracts (from chainlink/ directory)

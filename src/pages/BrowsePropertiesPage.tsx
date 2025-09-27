@@ -174,7 +174,7 @@ const formatCurrency = (cents: number): string => {
   }).format(cents / 100);
 };
 
-export const BrowsePropertiesPage: React.FC = () => {
+const BrowsePropertiesPage: React.FC = () => {
   const { user } = useAuth();
   const [properties, setProperties] = useState<any[]>([]);
   const [userShares, setUserShares] = useState<Record<string, number>>({});
@@ -843,3 +843,5 @@ export const BrowsePropertiesPage: React.FC = () => {
     </div>
   );
 };
+
+export default BrowsePropertiesPage;

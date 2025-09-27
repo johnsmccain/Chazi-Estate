@@ -1,4 +1,4 @@
-import { Building2, CreditCard, FileText, Home, Key, PieChart, Search, Shield, Vote } from "lucide-react";
+import { Building2, CreditCard, FileText, Home, Key, PieChart, Search, Shield, Vote, Wallet, Server } from "lucide-react";
 
 export const navItems = [
     { 
@@ -23,7 +23,7 @@ export const navItems = [
       color: 'from-purple-400 to-pink-500'
     },
     { 
-      path: '/buy-fraction', 
+      path: '/buy-fraction/1', 
       icon: PieChart, 
       label: 'Buy Fraction',
       description: 'Fractional ownership',
@@ -64,4 +64,32 @@ export const navItems = [
       description: 'Generate new deeds',
       color: 'from-pink-400 to-rose-500'
     },
+            { 
+              path: '/wallet-test', 
+              icon: Wallet, 
+              label: 'Wallet Test',
+              description: 'Test wallet integration',
+              color: 'from-cyan-400 to-blue-500'
+            },
+            { 
+              path: '/backend-test', 
+              icon: Server, 
+              label: 'Backend Test',
+              description: 'Test backend integration',
+              color: 'from-green-400 to-emerald-500'
+            },
+            { 
+              path: '/wallet-debug', 
+              icon: Wallet, 
+              label: 'Wallet Debug',
+              description: 'Debug wallet connection issues',
+              color: 'from-red-400 to-orange-500'
+            },
+            { 
+              path: '/rainbowkit-test', 
+              icon: Wallet, 
+              label: 'RainbowKit Test',
+              description: 'Test RainbowKit wallet integration',
+              color: 'from-rainbow-400 to-purple-500'
+            },
   ];

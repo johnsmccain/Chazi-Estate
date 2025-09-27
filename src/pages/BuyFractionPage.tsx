@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
+import { useHedera } from '../hooks/useHedera';
 import { Property, propertyService, formatCurrency } from '../lib/supabase';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { PropertyDetails } from '../components/PropertyDetails';
@@ -15,10 +16,11 @@ import {
   Sparkles
 } from 'lucide-react';
 
-export const BuyFractionPage: React.FC = () => {
+const BuyFractionPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const hedera = useHedera();
   
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
@@ -62,24 +64,30 @@ export const BuyFractionPage: React.FC = () => {
   };
 
   const handlePurchase = async () => {
-    if (!property || !user || calculatedShares === 0) return;
+    if (!property || !user || calculatedShares === 0 || !hedera.isConnected) return;
 
     setPurchasing(true);
     try {
       const totalAmount = calculatedShares * (property.share_price || 0);
       
-      await propertyService.purchaseShares(
-        property.id, 
-        user.id, 
-        calculatedShares, 
-        totalAmount
-      );
-
-      navigate('/my-properties', { 
-        state: { 
-          message: `Successfully purchased ${calculatedShares} shares of ${property.title}!` 
-        }
+      // Use Hedera hook to buy shares
+      const result = await hedera.buyShares({
+        propertyId: property.id,
+        shares: calculatedShares.toString(),
+        totalCost: totalAmount.toString(),
+        buyer: hedera.account || '',
       });
+
+      if (result.success) {
+        navigate('/my-properties', { 
+          state: { 
+            message: `Successfully purchased ${calculatedShares} shares of ${property.title}!`,
+            transactionHash: result.transactionHash
+          }
+        });
+      } else {
+        throw new Error(result.error || 'Failed to purchase shares');
+      }
     } catch (error) {
       console.error('Error purchasing shares:', error);
       alert('Failed to purchase shares. Please try again.');
@@ -189,3 +197,5 @@ export const BuyFractionPage: React.FC = () => {
     </div>
   );
 };
+
+export default BuyFractionPage;

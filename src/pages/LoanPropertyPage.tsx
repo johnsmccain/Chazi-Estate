@@ -31,7 +31,7 @@ interface LoanOption {
   color: string;
 }
 
-export const LoanPropertyPage: React.FC = () => {
+const LoanPropertyPage: React.FC = () => {
   const [propertyValue, setPropertyValue] = useState('');
   const [downPayment, setDownPayment] = useState('');
   const [selectedLoan, setSelectedLoan] = useState<LoanOption | null>(null);
@@ -41,7 +41,7 @@ export const LoanPropertyPage: React.FC = () => {
   const loanOptions: LoanOption[] = [
     {
       id: '1',
-      name: 'DeedAI Smart Loan',
+      name: 'chazi-chain Smart Loan',
       type: 'Blockchain-Secured',
       interestRate: '3.25%',
       term: '30 years',
@@ -444,7 +444,7 @@ export const LoanPropertyPage: React.FC = () => {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-white mb-4 flex items-center justify-center space-x-3">
             <Shield className="h-8 w-8 text-emerald-400" />
-            <span>Why Choose DeedAI Financing?</span>
+            <span>Why Choose chazi-chain Financing?</span>
             <Heart className="h-6 w-6 text-pink-400" />
           </h2>
           <p className="text-xl text-gray-300">
@@ -496,3 +496,5 @@ export const LoanPropertyPage: React.FC = () => {
     </div>
   );
 };
+
+export default LoanPropertyPage;

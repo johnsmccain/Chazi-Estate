@@ -1,0 +1,28 @@
+{
+  "timestamp": "2025-08-19T15:26:12.572Z",
+  "network": "testnet",
+  "operatorId": "0.0.6096584",
+  "contracts": {
+    "PropertyToken": {
+      "contractId": "0.0.1917975",
+      "fileId": "0.0.1010548",
+      "gas": 3000000
+    },
+    "PropertyFactory": {
+      "contractId": "0.0.1503827",
+      "fileId": "0.0.1227429",
+      "gas": 3000000
+    },
+    "PropertyDeed": {
+      "contractId": "0.0.1280096",
+      "fileId": "0.0.1281955",
+      "gas": 3000000
+    },
+    "DeedDAO": {
+      "contractId": "0.0.1746353",
+      "fileId": "0.0.1461206",
+      "gas": 3000000
+    }
+  },
+  "note": "Mock deployment for testing - replace with actual contract addresses in production"
+}

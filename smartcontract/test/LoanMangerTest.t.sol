@@ -116,4 +116,84 @@ contract LoanManagerTest is Test {
         // Now should be in default
         assertTrue(loanManager.checkLoanDefault(loanId));
     }
+    
+    // Fuzz tests
+    function testFuzz_CreateLoan(uint256 loanAmount, uint256 interestRate, uint256 duration) public {
+        vm.assume(loanAmount > 0 && loanAmount <= 1000000 ether);
+        vm.assume(interestRate > 0 && interestRate <= 5000); // Max 50% interest
+        vm.assume(duration > 0 && duration <= 365 days);
+        
+        vm.prank(owner);
+        uint256 loanId = loanManager.createLoan(
+            PROPERTY_ID,
+            borrower,
+            loanAmount,
+            interestRate,
+            duration
+        );
+        
+        assertEq(loanId, 1);
+        
+        (uint256 propertyId, address loanBorrower, uint256 amount, , uint256 rate, uint256 loanDuration, , bool isActive, ) = loanManager.loans(loanId);
+        
+        assertEq(propertyId, PROPERTY_ID);
+        assertEq(loanBorrower, borrower);
+        assertEq(amount, loanAmount);
+        assertEq(rate, interestRate);
+        assertEq(loanDuration, duration);
+        assertTrue(isActive);
+    }
+    
+    function testFuzz_MakePayment(uint256 loanAmount, uint256 paymentAmount) public {
+        vm.assume(loanAmount > 0 && loanAmount <= 1000000 ether);
+        vm.assume(paymentAmount > 0 && paymentAmount <= loanAmount * 2); // Allow overpayment
+        
+        vm.prank(owner);
+        uint256 loanId = loanManager.createLoan(
+            PROPERTY_ID,
+            borrower,
+            loanAmount,
+            500, // 5% interest
+            30 days
+        );
+        
+        vm.deal(borrower, paymentAmount);
+        
+        vm.prank(borrower);
+        loanManager.makePayment{value: paymentAmount}(loanId);
+        
+        (, , , uint256 paidAmount, , , , bool isActive, bool isFullyPaid) = loanManager.loans(loanId);
+        
+        assertEq(paidAmount, paymentAmount);
+        
+        // Check if loan is fully paid
+        uint256 totalOwed = loanManager.calculateTotalOwed(loanId);
+        if (paymentAmount >= totalOwed) {
+            assertFalse(isActive);
+            assertTrue(isFullyPaid);
+        } else {
+            assertTrue(isActive);
+            assertFalse(isFullyPaid);
+        }
+    }
+    
+    function testFuzz_CalculateTotalOwed(uint256 loanAmount, uint256 interestRate) public {
+        vm.assume(loanAmount > 0 && loanAmount <= 1000000 ether);
+        vm.assume(interestRate > 0 && interestRate <= 5000); // Max 50% interest
+        
+        vm.prank(owner);
+        uint256 loanId = loanManager.createLoan(
+            PROPERTY_ID,
+            borrower,
+            loanAmount,
+            interestRate,
+            30 days
+        );
+        
+        uint256 totalOwed = loanManager.calculateTotalOwed(loanId);
+        uint256 expectedInterest = (loanAmount * interestRate) / 10000;
+        uint256 expectedTotal = loanAmount + expectedInterest;
+        
+        assertEq(totalOwed, expectedTotal);
+    }
 }

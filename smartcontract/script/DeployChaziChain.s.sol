@@ -5,7 +5,7 @@ import "forge-std/Script.sol";
 import "forge-std/console.sol";
 import {PropertyFactory} from "../src/core/PropertyFactory.sol";
 
-contract DeployDeedAI is Script {
+contract DeployChaziChain is Script {
     // Deployment addresses will be stored here
     address public propertyFactory;
     address public propertyDeed;
@@ -24,7 +24,7 @@ contract DeployDeedAI is Script {
         // Load deployment configuration
         DeployConfig memory config = getDeployConfig();
         
-        console.log("Deploying DeedAI contracts to:", config.networkName);
+        console.log("Deploying chazi-chain contracts to:", config.networkName);
         console.log("Admin address:", config.admin);
         
         // Start broadcasting transactions
