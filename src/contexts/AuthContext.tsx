@@ -34,7 +34,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     // Check for stored user data
-    const storedUser = localStorage.getItem('deedai_user');
+    const storedUser = localStorage.getItem('chazi_estate_user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
@@ -42,12 +42,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = (userData: User) => {
     setUser(userData);
-    localStorage.setItem('deedai_user', JSON.stringify(userData));
+    localStorage.setItem('chazi_estate_user', JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('deedai_user');
+    localStorage.removeItem('chazi_estate_user');
   };
 
   const value = {

@@ -15,7 +15,7 @@ const logFormat = winston.format.combine(
 export const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
   format: logFormat,
-  defaultMeta: { service: 'deedai-backend' },
+  defaultMeta: { service: 'chazi-estate-backend' },
   transports: [
     // Write all logs with importance level of `error` or less to `error.log`
     new winston.transports.File({ 

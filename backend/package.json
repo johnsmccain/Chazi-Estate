@@ -1,7 +1,7 @@
 {
-  "name": "chazi-chain-backend",
+  "name": "chazi-estate-backend",
   "version": "1.0.0",
-  "description": "Backend API for chazi-chain platform connecting frontend with Hedera smart contracts",
+  "description": "Backend API for CHAZI ESTATE platform connecting frontend with Hedera smart contracts",
   "main": "dist/server.js",
   "type": "module",
   "scripts": {

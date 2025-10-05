@@ -1,126 +1,130 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
-import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
-import {AutomationCompatible} from "@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol";
-import {IPropertyToken} from "../interfaces/IPropertyToken.sol";
-import {PropertyDeed} from "../core/PropertyDeed.sol";
-
-
-
-// ============================================================================
-// LOAN MANAGER
-// ============================================================================
+import {IERC721} from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 contract LoanManager is Ownable, ReentrancyGuard {
-    using Math for uint256;
-    
     struct Loan {
+        uint256 id;
         uint256 propertyId;
         address borrower;
-        uint256 loanAmount;
-        uint256 paidAmount;
-        uint256 interestRate; // basis points (e.g., 500 = 5%)
-        uint256 duration; // in seconds
+        uint256 principal;
+        uint256 interestRate;
+        uint256 duration;
         uint256 startTime;
+        uint256 totalPaid;
         bool isActive;
-        bool isFullyPaid;
+        bool isDefaulted;
     }
+
+    mapping(uint256 => Loan) public loans;
+    mapping(address => uint256[]) public userLoans;
     
-    mapping(uint256 => Loan) public loans; // loanId => Loan
-    mapping(uint256 => uint256) public propertyLoans; // propertyId => loanId
+    IERC721 public propertyDeed;
     uint256 public nextLoanId = 1;
-    
-    PropertyDeed public immutable propertyDeed;
-    
-    event LoanCreated(uint256 indexed loanId, uint256 indexed propertyId, address indexed borrower, uint256 amount);
-    event LoanPayment(uint256 indexed loanId, uint256 amount, uint256 totalPaid);
-    event LoanFullyPaid(uint256 indexed loanId, uint256 indexed propertyId);
-    event LoanDefaulted(uint256 indexed loanId, uint256 indexed propertyId);
-    
-    constructor(address _propertyDeed) Ownable(msg.sender){
-        propertyDeed = PropertyDeed(_propertyDeed);
+    uint256 public constant MAX_LTV = 8000; // 80%
+    uint256 public constant MIN_DURATION = 30 days;
+    uint256 public constant MAX_DURATION = 365 days;
+
+    event LoanCreated(uint256 indexed loanId, uint256 indexed propertyId, address borrower, uint256 amount);
+    event PaymentMade(uint256 indexed loanId, address borrower, uint256 amount);
+    event LoanDefaulted(uint256 indexed loanId);
+    event LoanRepaid(uint256 indexed loanId);
+
+    constructor(address _propertyDeed) Ownable(msg.sender) {
+        propertyDeed = IERC721(_propertyDeed);
     }
-    
+
     function createLoan(
         uint256 propertyId,
-        address borrower,
-        uint256 loanAmount,
-        uint256 interestRate,
+        uint256 amount,
         uint256 duration
-    ) external onlyOwner returns (uint256) {
-        require(propertyLoans[propertyId] == 0, "Property already has active loan");
-        
+    ) external returns (uint256) {
+        require(propertyDeed.ownerOf(propertyId) == msg.sender, "Not property owner");
+        require(duration >= MIN_DURATION && duration <= MAX_DURATION, "Invalid duration");
+        require(amount > 0, "Invalid loan amount");
+
         uint256 loanId = nextLoanId++;
         
         loans[loanId] = Loan({
+            id: loanId,
             propertyId: propertyId,
-            borrower: borrower,
-            loanAmount: loanAmount,
-            paidAmount: 0,
-            interestRate: interestRate,
+            borrower: msg.sender,
+            principal: amount,
+            interestRate: 500, // 5% annual
             duration: duration,
             startTime: block.timestamp,
+            totalPaid: 0,
             isActive: true,
-            isFullyPaid: false
+            isDefaulted: false
         });
-        
-        propertyLoans[propertyId] = loanId;
-        
-        emit LoanCreated(loanId, propertyId, borrower, loanAmount);
+
+        userLoans[msg.sender].push(loanId);
+
+        // Transfer loan amount to borrower
+        (bool success, ) = msg.sender.call{value: amount}("");
+        require(success, "Loan transfer failed");
+
+        emit LoanCreated(loanId, propertyId, msg.sender, amount);
         return loanId;
     }
-    
-    function makePayment(uint256 loanId) external payable nonReentrant {
+
+    function makePayment(uint256 loanId, uint256 amount) external payable {
         Loan storage loan = loans[loanId];
         require(loan.isActive, "Loan not active");
-        require(msg.sender == loan.borrower, "Not loan borrower");
-        require(msg.value > 0, "Payment must be greater than 0");
-        
-        loan.paidAmount = loan.paidAmount + msg.value;
-        
-        emit LoanPayment(loanId, msg.value, loan.paidAmount);
-        
-        // Check if loan is fully paid
+        require(msg.sender == loan.borrower, "Not borrower");
+        require(msg.value >= amount, "Insufficient payment");
+
+        loan.totalPaid += amount;
+
         uint256 totalOwed = calculateTotalOwed(loanId);
-        if (loan.paidAmount >= totalOwed) {
-            loan.isFullyPaid = true;
+        if (loan.totalPaid >= totalOwed) {
             loan.isActive = false;
-            propertyLoans[loan.propertyId] = 0;
-            
-            // Transfer property deed to borrower
-            // Note: In a real implementation, the LoanManager would need to be approved to transfer the deed
-            // For now, we'll emit an event indicating the loan is paid and the deed should be transferred
-            // propertyDeed.safeTransferFrom(address(this), loan.borrower, loan.propertyId);
-            
-            emit LoanFullyPaid(loanId, loan.propertyId);
+            emit LoanRepaid(loanId);
         }
+
+        // Refund excess payment
+        if (msg.value > amount) {
+            (bool success, ) = msg.sender.call{value: msg.value - amount}("");
+            require(success, "Refund failed");
+        }
+
+        emit PaymentMade(loanId, msg.sender, amount);
     }
-    
+
     function calculateTotalOwed(uint256 loanId) public view returns (uint256) {
         Loan memory loan = loans[loanId];
-        uint256 interest = (loan.loanAmount * loan.interestRate) /(10000);
-        return loan.loanAmount + interest;
-    }
-    
-    function checkLoanDefault(uint256 loanId) public view returns (bool) {
-        Loan memory loan = loans[loanId];
-        return loan.isActive && (block.timestamp > loan.startTime + loan.duration);
-    }
-    
-    function handleDefault(uint256 loanId) external onlyOwner {
-        require(checkLoanDefault(loanId), "Loan not in default");
+        if (!loan.isActive) return 0;
+
+        uint256 timeElapsed = block.timestamp - loan.startTime;
+        uint256 interest = (loan.principal * loan.interestRate * timeElapsed) / (10000 * 365 days);
         
+        return loan.principal + interest - loan.totalPaid;
+    }
+
+    function checkLoanDefault(uint256 loanId) external {
         Loan storage loan = loans[loanId];
-        loan.isActive = false;
-        propertyLoans[loan.propertyId] = 0;
+        require(loan.isActive, "Loan not active");
         
-        emit LoanDefaulted(loanId, loan.propertyId);
+        if (block.timestamp > loan.startTime + loan.duration) {
+            uint256 totalOwed = calculateTotalOwed(loanId);
+            if (loan.totalPaid < totalOwed) {
+                loan.isDefaulted = true;
+                loan.isActive = false;
+                emit LoanDefaulted(loanId);
+            }
+        }
     }
+
+    function getLoan(uint256 loanId) external view returns (Loan memory) {
+        return loans[loanId];
+    }
+
+    function getUserLoans(address user) external view returns (uint256[] memory) {
+        return userLoans[user];
+    }
+
+    receive() external payable {}
 }

@@ -58,7 +58,7 @@ export const PropertyNotFound: React.FC = () => {
 
         <div className="mt-8 text-sm text-gray-400">
           <p>Need help? Contact our support team</p>
-          <p className="text-emerald-400">support@deedai.com</p>
+          <p className="text-emerald-400">support@chaziestate.com</p>
         </div>
       </motion.div>
     </div>

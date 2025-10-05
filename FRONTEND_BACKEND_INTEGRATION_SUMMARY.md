@@ -2,7 +2,7 @@
 
 ## 🎉 Complete Frontend-Backend Integration Achieved!
 
-Your DeedAI platform now has **full end-to-end integration** between the frontend and backend, connecting to your deployed Hedera smart contracts!
+Your CHAZI ESTATE platform now has **full end-to-end integration** between the frontend and backend, connecting to your deployed Hedera smart contracts!
 
 ## ✅ What's Been Implemented
 
@@ -202,4 +202,4 @@ Your platform is now ready for:
 - **Backend Scaling**: API ready for production deployment
 - **Frontend Deployment**: Complete application ready for hosting
 
-The integration is **complete and fully functional**! Users can now connect their wallets, interact with your deployed smart contracts, and experience the full DeedAI platform functionality. 🏠🚀
+The integration is **complete and fully functional**! Users can now connect their wallets, interact with your deployed smart contracts, and experience the full CHAZI ESTATE platform functionality. 🏠🚀

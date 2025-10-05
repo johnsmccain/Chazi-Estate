@@ -6,8 +6,7 @@ import {
   Shield, 
   Zap, 
   Globe, 
-  ArrowRight,
-  CheckCircle
+  ArrowRight
 } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
@@ -44,7 +43,7 @@ const LandingPage: React.FC = () => {
               <Building2 className="h-16 w-16 text-blue-400" />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Deed<span className="text-blue-400">AI</span>
+              CHAZI <span className="text-blue-400">ESTATE</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
               The future of real estate ownership is here. Secure, verify, and manage your property deeds 
@@ -80,7 +79,7 @@ const LandingPage: React.FC = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-white mb-4">
-              Why Choose chazi-chain?
+              Why Choose CHAZI ESTATE?
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Revolutionary technology meets real estate to create the most secure and efficient 

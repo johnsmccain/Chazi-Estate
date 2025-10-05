@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# chazi-chain Platform Startup Script
+# CHAZI ESTATE Platform Startup Script
 # This script starts both the backend and frontend servers
 
 set -e  # Exit on any error
@@ -33,7 +33,7 @@ print_error() {
 
 print_header() {
     echo -e "${PURPLE}================================${NC}"
-    echo -e "${PURPLE}  chazi-chain Platform Startup${NC}"
+    echo -e "${PURPLE}  CHAZI ESTATE Platform Startup${NC}"
     echo -e "${PURPLE}================================${NC}"
 }
 
@@ -154,7 +154,7 @@ start_frontend() {
 # Function to display application info
 show_app_info() {
     echo ""
-    print_success "🎉 chazi-chain Platform is now running!"
+    print_success "🎉 CHAZI ESTATE Platform is now running!"
     echo ""
     echo -e "${CYAN}📱 Frontend:${NC} http://localhost:5173"
     echo -e "${CYAN}🔧 Backend:${NC}  http://localhost:3001"
@@ -213,7 +213,7 @@ main() {
     
     # Check if we're in the right directory
     if [ ! -f "package.json" ] || [ ! -d "backend" ]; then
-        print_error "Please run this script from the chazi-chain project root directory"
+        print_error "Please run this script from the CHAZI ESTATE project root directory"
         exit 1
     fi
     
@@ -229,7 +229,7 @@ main() {
         exit 1
     fi
     
-    print_status "Starting chazi-chain Platform..."
+    print_status "Starting CHAZI ESTATE Platform..."
     echo ""
     
     # Start backend first

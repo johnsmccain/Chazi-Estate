@@ -1,8 +1,8 @@
-# 🚀 DeedAI Smart Contracts Integration Summary
+# 🚀 CHAZI ESTATE Smart Contracts Integration Summary
 
 ## ✅ **Integration Complete!**
 
-Your DeedAI real estate tokenization platform has been successfully integrated with the deployed Hedera smart contracts. All contract addresses, ABIs, and interaction methods are now properly configured across both frontend and backend.
+Your CHAZI ESTATE real estate tokenization platform has been successfully integrated with the deployed Hedera smart contracts. All contract addresses, ABIs, and interaction methods are now properly configured across both frontend and backend.
 
 ---
 
@@ -292,7 +292,7 @@ If you encounter any issues with the integration:
 
 ## 🎉 **Congratulations!**
 
-Your DeedAI platform is now fully integrated with the deployed Hedera smart contracts! You can:
+Your CHAZI ESTATE platform is now fully integrated with the deployed Hedera smart contracts! You can:
 
 - ✅ Create and manage tokenized properties
 - ✅ Buy and sell fractional shares
@@ -301,4 +301,4 @@ Your DeedAI platform is now fully integrated with the deployed Hedera smart cont
 - ✅ Manage loans and revenue distribution
 - ✅ Transfer tokens between users
 
-**Your real estate tokenization platform is ready for the next phase of development! 🏠🚀**
+**Your CHAZI ESTATE platform is ready for the next phase of development! 🏠🚀**

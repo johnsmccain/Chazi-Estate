@@ -36,7 +36,7 @@ contract PropertyDeed is ERC721, Ownable {
     event PropertyUpdated(uint256 indexed propertyId, uint256 newValue);
     event PropertyDeactivated(uint256 indexed propertyId);
     
-    constructor() ERC721("chazi-chain Property", "DEED") Ownable(msg.sender) {}
+    constructor() ERC721("CHAZI ESTATE Property", "DEED") Ownable(msg.sender) {}
     
     function createProperty(
         string calldata metadataURI,

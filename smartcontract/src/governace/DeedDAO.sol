@@ -1,186 +1,119 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
-import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
-import {AutomationCompatible} from "@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol";
 import {IPropertyToken} from "../interfaces/IPropertyToken.sol";
 
-
-
-// ============================================================================
-// DAO CONTRACT
-// ============================================================================
 contract DeedDAO is Ownable, ReentrancyGuard {
-    
-    enum ProposalType { RENT_PROPERTY, SELL_PROPERTY, CHANGE_MANAGER, CHANGE_RULES }
-    enum ProposalStatus { PENDING, ACTIVE, SUCCEEDED, FAILED, EXECUTED }
-    
     struct Proposal {
         uint256 id;
         uint256 propertyId;
-        address proposer;
         string description;
-        ProposalType proposalType;
-        ProposalStatus status;
-        uint256 forVotes;
-        uint256 againstVotes;
-        uint256 startTime;
-        uint256 endTime;
+        uint256 votingDeadline;
+        uint256 yesVotes;
+        uint256 noVotes;
         bool executed;
-        mapping(address => bool) hasVoted;
+        bool active;
+        address proposer;
+        uint256 createdAt;
     }
-    
+
     mapping(uint256 => Proposal) public proposals;
+    mapping(uint256 => mapping(address => bool)) public hasVoted;
     mapping(uint256 => address) public propertyTokens;
+    
     uint256 public nextProposalId = 1;
-    
     uint256 public constant VOTING_PERIOD = 7 days;
-    uint256 public constant VOTING_DELAY = 1 days;
-    uint256 public constant QUORUM_PERCENTAGE = 25; // 25%
-    
-    event ProposalCreated(uint256 indexed proposalId, uint256 indexed propertyId, address indexed proposer, ProposalType proposalType);
+    uint256 public constant MIN_VOTING_POWER = 100; // Minimum shares to vote
+
+    event ProposalCreated(uint256 indexed proposalId, uint256 indexed propertyId, address proposer);
     event VoteCast(uint256 indexed proposalId, address indexed voter, bool support, uint256 weight);
     event ProposalExecuted(uint256 indexed proposalId);
-    
-    function addProperty(uint256 propertyId, address propertyToken) external onlyOwner {
-        propertyTokens[propertyId] = propertyToken;
-    }
-    
+    event PropertyAdded(uint256 indexed propertyId, address tokenContract);
+
     constructor() Ownable(msg.sender) {}
+
+    function addProperty(uint256 propertyId, address tokenContract) external onlyOwner {
+        propertyTokens[propertyId] = tokenContract;
+        emit PropertyAdded(propertyId, tokenContract);
+    }
+
     function createProposal(
         uint256 propertyId,
         string calldata description,
-        uint8 proposalType
+        uint256 votingDuration
     ) external returns (uint256) {
-        require(hasVotingPower(msg.sender, propertyId), "No voting power");
-        require(proposalType <= uint8(ProposalType.CHANGE_RULES), "Invalid proposal type");
+        require(propertyTokens[propertyId] != address(0), "Property not registered");
+        require(hasVotingPower(msg.sender, propertyId), "Insufficient voting power");
         
         uint256 proposalId = nextProposalId++;
+        uint256 deadline = block.timestamp + (votingDuration > 0 ? votingDuration : VOTING_PERIOD);
         
-        Proposal storage proposal = proposals[proposalId];
-        proposal.id = proposalId;
-        proposal.propertyId = propertyId;
-        proposal.proposer = msg.sender;
-        proposal.description = description;
-        proposal.proposalType = ProposalType(proposalType);
-        proposal.status = ProposalStatus.PENDING;
-        proposal.startTime = block.timestamp + VOTING_DELAY;
-        proposal.endTime = block.timestamp + VOTING_DELAY + VOTING_PERIOD;
-        
-        emit ProposalCreated(proposalId, propertyId, msg.sender, ProposalType(proposalType));
+        proposals[proposalId] = Proposal({
+            id: proposalId,
+            propertyId: propertyId,
+            description: description,
+            votingDeadline: deadline,
+            yesVotes: 0,
+            noVotes: 0,
+            executed: false,
+            active: true,
+            proposer: msg.sender,
+            createdAt: block.timestamp
+        });
+
+        emit ProposalCreated(proposalId, propertyId, msg.sender);
         return proposalId;
     }
-    
+
     function vote(uint256 proposalId, bool support) external nonReentrant {
         Proposal storage proposal = proposals[proposalId];
-        require(proposal.status == ProposalStatus.PENDING || proposal.status == ProposalStatus.ACTIVE, "Proposal not active");
-        require(block.timestamp >= proposal.startTime, "Voting not started");
-        require(block.timestamp <= proposal.endTime, "Voting ended");
-        require(!proposal.hasVoted[msg.sender], "Already voted");
+        require(proposal.active, "Proposal not active");
+        require(block.timestamp <= proposal.votingDeadline, "Voting period ended");
+        require(!hasVoted[proposalId][msg.sender], "Already voted");
         require(hasVotingPower(msg.sender, proposal.propertyId), "No voting power");
-        
-        if (proposal.status == ProposalStatus.PENDING) {
-            proposal.status = ProposalStatus.ACTIVE;
-        }
-        
-        IPropertyToken token = IPropertyToken(propertyTokens[proposal.propertyId]);
-        uint256 votingPower = token.balanceOf(msg.sender, proposal.propertyId);
-        
-        proposal.hasVoted[msg.sender] = true;
-        
+
+        uint256 votingWeight = getVotingPower(msg.sender, proposal.propertyId);
+        hasVoted[proposalId][msg.sender] = true;
+
         if (support) {
-            proposal.forVotes = proposal.forVotes + votingPower;
+            proposal.yesVotes += votingWeight;
         } else {
-            proposal.againstVotes = proposal.againstVotes + votingPower;
+            proposal.noVotes += votingWeight;
         }
-        
-        emit VoteCast(proposalId, msg.sender, support, votingPower);
-        
-        _updateProposalStatus(proposalId);
+
+        emit VoteCast(proposalId, msg.sender, support, votingWeight);
     }
-    
-    function executeProposal(uint256 proposalId) external nonReentrant {
+
+    function executeProposal(uint256 proposalId) external {
         Proposal storage proposal = proposals[proposalId];
-        require(proposal.status == ProposalStatus.SUCCEEDED, "Proposal not succeeded");
+        require(proposal.active, "Proposal not active");
+        require(block.timestamp > proposal.votingDeadline, "Voting still active");
         require(!proposal.executed, "Already executed");
-        
+        require(proposal.yesVotes > proposal.noVotes, "Proposal rejected");
+
         proposal.executed = true;
-        
-        // Execute based on proposal type
-        if (proposal.proposalType == ProposalType.RENT_PROPERTY) {
-            _executeRentProposal(proposal.propertyId);
-        } else if (proposal.proposalType == ProposalType.SELL_PROPERTY) {
-            _executeSellProposal(proposal.propertyId);
-        }
-        // Add other execution logic as needed
-        
+        proposal.active = false;
+
         emit ProposalExecuted(proposalId);
     }
-    
+
     function hasVotingPower(address user, uint256 propertyId) public view returns (bool) {
-        address tokenAddress = propertyTokens[propertyId];
-        if (tokenAddress == address(0)) return false;
+        address tokenContract = propertyTokens[propertyId];
+        if (tokenContract == address(0)) return false;
         
-        IPropertyToken token = IPropertyToken(tokenAddress);
-        return token.balanceOf(user, propertyId) > 0;
+        return IPropertyToken(tokenContract).getUserShares(user, propertyId) >= MIN_VOTING_POWER;
     }
-    
-    function _updateProposalStatus(uint256 proposalId) internal {
-        Proposal storage proposal = proposals[proposalId];
+
+    function getVotingPower(address user, uint256 propertyId) public view returns (uint256) {
+        address tokenContract = propertyTokens[propertyId];
+        if (tokenContract == address(0)) return 0;
         
-        if (block.timestamp > proposal.endTime) {
-            // For ERC1155, we need a different approach to calculate quorum
-            // This is a simplified version - in a real implementation you'd track total supply differently
-            uint256 totalVotes = proposal.forVotes + proposal.againstVotes;
-            
-            // Simple majority rule for now (can be enhanced later)
-            if (totalVotes > 0 && proposal.forVotes > proposal.againstVotes) {
-                proposal.status = ProposalStatus.SUCCEEDED;
-            } else {
-                proposal.status = ProposalStatus.FAILED;
-            }
-        }
+        return IPropertyToken(tokenContract).getUserShares(user, propertyId);
     }
-    
-    function _executeRentProposal(uint256 propertyId) internal {
-        // Implementation for enabling property rental
-    }
-    
-    function _executeSellProposal(uint256 propertyId) internal {
-        // Implementation for property sale
-    }
-    
-    function getProposal(uint256 proposalId) external view returns (
-        uint256 id,
-        uint256 propertyId,
-        address proposer,
-        string memory description,
-        ProposalType proposalType,
-        ProposalStatus status,
-        uint256 forVotes,
-        uint256 againstVotes,
-        uint256 startTime,
-        uint256 endTime,
-        bool executed
-    ) {
-        Proposal storage proposal = proposals[proposalId];
-        return (
-            proposal.id,
-            proposal.propertyId,
-            proposal.proposer,
-            proposal.description,
-            proposal.proposalType,
-            proposal.status,
-            proposal.forVotes,
-            proposal.againstVotes,
-            proposal.startTime,
-            proposal.endTime,
-            proposal.executed
-        );
+
+    function getProposal(uint256 proposalId) external view returns (Proposal memory) {
+        return proposals[proposalId];
     }
 }

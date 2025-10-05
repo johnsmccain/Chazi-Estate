@@ -152,7 +152,7 @@ process.on('SIGINT', () => {
 
 // Start server
 app.listen(PORT, () => {
-  logger.info(`🚀 chazi-chain Backend Server running on port ${PORT}`);
+  logger.info(`🚀 CHAZI ESTATE Backend Server running on port ${PORT}`);
   logger.info(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   logger.info(`🔗 Health check: http://localhost:${PORT}/health`);
 });

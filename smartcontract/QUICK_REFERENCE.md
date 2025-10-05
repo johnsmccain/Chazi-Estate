@@ -1,4 +1,4 @@
-# chazi-chain Smart Contracts - Quick Reference
+# CHAZI ESTATE Smart Contracts - Quick Reference
 
 ## 🚀 **One-Command Deployment**
 

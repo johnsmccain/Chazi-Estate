@@ -56,14 +56,14 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
         
         // Initialize HashConnect
         const appMetadata: DappMetadata = {
-          name: "chazi-chain",
+          name: "CHAZI ESTATE",
           description: "Real Estate Tokenization Platform",
           icons: ["https://your-app-icon-url.com/icon.png"],
           url: window.location.origin,
         };
 
         console.log('📱 Creating HashConnect instance...');
-        const hashConnect = new HashConnect(LedgerId.TESTNET, "deedai-platform", appMetadata, true);
+        const hashConnect = new HashConnect(LedgerId.TESTNET, "chazi-estate-platform", appMetadata, true);
         
         console.log('🔧 Initializing HashConnect...');
         await hashConnect.init();

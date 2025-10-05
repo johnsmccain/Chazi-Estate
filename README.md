@@ -1,4 +1,4 @@
-chazi-chain
+CHAZI ESTATE
 
 
 Wallet Integration - Connect with HashPack or other Hedera wallets

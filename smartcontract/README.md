@@ -1,8 +1,8 @@
-# chazi-chain Smart Contracts - Deployment and Verification
+# CHAZI ESTATE Smart Contracts - Deployment and Verification
 
 ## 🚀 **Complete Deployment and Verification Solution**
 
-This repository contains a comprehensive bash script that handles both deployment and verification of your chazi-chain smart contracts on Hedera testnet.
+This repository contains a comprehensive bash script that handles both deployment and verification of your CHAZI ESTATE smart contracts on Hedera testnet.
 
 ## 📋 **What's Included**
 
@@ -280,7 +280,7 @@ The script includes comprehensive testing:
 
 ## 🎉 **Success!**
 
-Your chazi-chain smart contracts are now ready for deployment and verification on Hedera testnet! The comprehensive script handles all aspects of the deployment process, from building and testing to verification preparation.
+Your CHAZI ESTATE smart contracts are now ready for deployment and verification on Hedera testnet! The comprehensive script handles all aspects of the deployment process, from building and testing to verification preparation.
 
 **Key Benefits:**
 - ✅ **Fully Automated**: One command deployment

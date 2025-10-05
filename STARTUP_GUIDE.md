@@ -1,6 +1,6 @@
-# DeedAI Platform Startup Guide
+# CHAZI ESTATE Platform Startup Guide
 
-This guide explains how to start, stop, and monitor the DeedAI platform using the provided bash scripts.
+This guide explains how to start, stop, and monitor the CHAZI ESTATE platform using the provided bash scripts.
 
 ## 🚀 Quick Start
 
@@ -48,7 +48,7 @@ This guide explains how to start, stop, and monitor the DeedAI platform using th
 8. Monitors logs in real-time
 
 ### 2. `stop-app.sh` - Shutdown Script
-**Purpose**: Gracefully stops all DeedAI services
+**Purpose**: Gracefully stops all CHAZI ESTATE services
 
 **Features**:
 - ✅ Graceful process termination
