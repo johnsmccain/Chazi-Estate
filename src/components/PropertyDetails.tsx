@@ -129,6 +129,44 @@ export const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) =>
             </div>
           </div>
         )}
+
+        {/* AI Hedera Agent Quick Actions */}
+        <div className="bg-linear-to-br from-purple-500/10 to-blue-500/10 rounded-xl p-4 border border-purple-400/20">
+          <h3 className="text-white font-semibold mb-3 flex items-center space-x-2">
+            <span>🤖</span>
+            <span>AI Assistant</span>
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button 
+              onClick={() => window.open('/ai-agent', '_blank')}
+              className="p-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-blue-300 hover:text-blue-200 transition-all duration-300 text-sm"
+            >
+              💬 Ask AI About Property
+            </button>
+            <button 
+              onClick={async () => {
+                try {
+                  const response = await fetch('/api/agent/analyze-invest', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      propertyData: property,
+                      investmentAmount: property.share_price || property.price,
+                      context: {}
+                    })
+                  });
+                  const data = await response.json();
+                  alert(data.data?.message || 'Analysis complete!');
+                } catch (error) {
+                  alert('AI Agent unavailable');
+                }
+              }}
+              className="p-2 bg-emerald-500/20 hover:bg-emerald-500/30 rounded-lg text-emerald-300 hover:text-emerald-200 transition-all duration-300 text-sm"
+            >
+              📊 Get Investment Analysis
+            </button>
+          </div>
+        </div>
       </div>
     </motion.div>
   );

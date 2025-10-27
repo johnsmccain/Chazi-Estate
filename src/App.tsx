@@ -29,6 +29,7 @@ const WalletTestPage = lazy(() => import('./pages/WalletTestPage'));
 const BackendTestPage = lazy(() => import('./pages/BackendTestPage'));
 const WalletDebugPage = lazy(() => import('./pages/WalletDebugPage'));
 const RainbowKitWalletTestPage = lazy(() => import('./pages/RainbowKitWalletTestPage'));
+const AIAgentPage = lazy(() => import('./pages/AIAgentPage'));
 
 function App() {
   // Register service worker for offline support and caching
@@ -161,6 +162,13 @@ function App() {
                         <ProtectedRoute>
                           <Layout>
                             <RainbowKitWalletTestPage />
+                          </Layout>
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/ai-agent" element={
+                        <ProtectedRoute>
+                          <Layout>
+                            <AIAgentPage />
                           </Layout>
                         </ProtectedRoute>
                       } />

@@ -451,6 +451,44 @@ export const AIPropertyAnalyzer: React.FC<AIPropertyAnalyzerProps> = ({
                 ))}
               </div>
             </div>
+
+            {/* Hedera Agent Actions */}
+            <div className="bg-linear-to-br from-purple-500/10 to-blue-500/10 rounded-xl p-6 border border-purple-400/20">
+              <h3 className="text-white font-semibold mb-4 flex items-center space-x-2">
+                <Zap className="h-5 w-5 text-purple-400" />
+                <span>AI Hedera Agent</span>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <button 
+                  onClick={() => window.open('/ai-agent', '_blank')}
+                  className="p-3 bg-blue-500/20 hover:bg-blue-500/30 rounded-xl text-blue-300 hover:text-blue-200 transition-all duration-300 text-sm font-medium"
+                >
+                  💬 Chat with AI Agent
+                </button>
+                <button 
+                  onClick={async () => {
+                    try {
+                      const response = await fetch('/api/agent/analyze-invest', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          propertyData: property,
+                          investmentAmount: 100000,
+                          context: { userProfile: { experience: 'Intermediate' } }
+                        })
+                      });
+                      const data = await response.json();
+                      alert(data.data?.message || 'Analysis complete!');
+                    } catch (error) {
+                      alert('AI Agent unavailable');
+                    }
+                  }}
+                  className="p-3 bg-emerald-500/20 hover:bg-emerald-500/30 rounded-xl text-emerald-300 hover:text-emerald-200 transition-all duration-300 text-sm font-medium"
+                >
+                  🤖 Get AI Investment Advice
+                </button>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

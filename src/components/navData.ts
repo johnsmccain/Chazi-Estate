@@ -1,4 +1,4 @@
-import { Building2, CreditCard, FileText, Home, Key, PieChart, Search, Shield, Vote, Wallet, Server } from "lucide-react";
+import { Building2, CreditCard, FileText, Home, Key, PieChart, Search, Shield, Vote, Wallet, Server, Bot } from "lucide-react";
 
 export const navItems = [
     { 
@@ -91,5 +91,12 @@ export const navItems = [
               label: 'RainbowKit Test',
               description: 'Test RainbowKit wallet integration',
               color: 'from-rainbow-400 to-purple-500'
+            },
+            { 
+              path: '/ai-agent', 
+              icon: Bot, 
+              label: 'AI Agent',
+              description: 'AI-powered Hedera investment assistant',
+              color: 'from-purple-400 to-blue-500'
             },
   ];

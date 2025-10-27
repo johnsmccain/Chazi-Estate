@@ -349,6 +349,22 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           )}
         </div>
 
+        {/* AI Agent Quick Action */}
+        <div className="mb-3">
+          <motion.button
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open('/ai-agent', '_blank');
+            }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-linear-to-r from-purple-500/20 to-blue-500/20 border border-purple-400/30 text-purple-300 py-2 px-3 rounded-lg font-medium text-sm hover:bg-purple-500/30 transition-all duration-300 flex items-center justify-center space-x-2"
+          >
+            <span>🤖</span>
+            <span>Ask AI Agent</span>
+          </motion.button>
+        </div>
+
         {/* Action Buttons */}
         <div className="grid grid-cols-3 gap-2">
           {property.fraction_available && property.available_shares && property.available_shares > 0 && (

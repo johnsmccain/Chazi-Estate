@@ -15,6 +15,7 @@ import aiRoutes from './routes/ai.js';
 import hederaRoutes from './routes/hedera.js';
 import daoRoutes from './routes/dao.js';
 import testRoutes from './routes/test.js';
+import aiHederaAgentRoutes from './routes/ai-hedera-agent.js';
 
 // Import services
 import { HederaService } from './services/hedera.js';
@@ -109,6 +110,7 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/hedera', hederaRoutes);
 app.use('/api/dao', daoRoutes);
 app.use('/api/test', testRoutes);
+app.use('/api/agent', aiHederaAgentRoutes);
 
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
